@@ -1,0 +1,125 @@
+
+.menu{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 0.3%;
+    margin-left: 0.7%;
+    margin-right: 0.7%;
+}
+
+.menuvoltar{
+    grid-template-columns: 1/3;
+    grid-template-rows: 1/2;
+    background-color: rgb(151, 149, 149);
+    border-radius: 2px;
+}
+
+.h5voltar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menuvisualizar{
+    grid-template-columns: 4/6;
+    grid-template-rows: 1/2;
+    background-color: rgb(88, 113, 255);
+    border-radius: 2px;
+}
+
+.h5visualizar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menueditar{
+    grid-template-columns: 7/9;
+    grid-template-rows: 1/2;
+    background-color: rgb(9, 219, 72);
+    border-radius: 2px;
+}
+
+.h5editar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menuapagar{
+    grid-template-columns: 10/12;
+    grid-template-rows: 1/2;
+    background-color: rgb(167, 52, 52);
+    border-radius: 2px;
+}
+
+.h5apagar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menufinan_funci{
+    grid-template-columns: 13/15;
+    grid-template-rows: 1/2;
+    background-color: rgb(151, 149, 149);
+    border-radius: 2px;
+}
+
+.h5finan_funci{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menuoutro2{
+    grid-template-columns: 2/5;
+    background-color: rgb(151, 149, 149);
+    border-radius: 2px;
+    margin-top: 0.4vh;
+}
+
+.h5outro2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menuoutro3{
+    grid-template-columns: 2/5;
+    background-color: rgb(151, 149, 149);
+    border-radius: 2px;
+    margin-top: 0.4vh;
+}
+
+.h5outro3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menuoutro4{
+    grid-template-columns: 2/5;
+    background-color: rgb(202, 202, 202);
+    border-radius: 2px;
+    margin-top: 0.4vh;
+}
+
+.h5outro4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menuoutro5{
+    grid-template-columns: 2/5;
+    background-color: rgb(151, 149, 149);
+    border-radius: 2px;
+    margin-top: 0.4vh;
+}
+
+.h5outro5{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

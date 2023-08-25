@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <title>CLIENTE LISTA</title>
+</head>
+<body>
+    <%- include('../partials/menuTopo.ejs'); %>
+    <div class="container mt-4">
+        <h2>Lista de Clientes</h2>
+            <hr>
+            <div class="container">Você possui um total de: <%= rows.length %>  Cliente(s)</div>
+                <table>
+                    <% for(let i=0; i<rows.length; i++) {%>
+                        <tbody>
+                            <tr>
+                                <td class="linhas">
+                                    <h3>
+                                       <%= rows[i].cliente_nome_fantasia %><h5>RS: <%= rows[i].cliente_razao_social %></h5>
+                                    </h3>
+                                    <h6>
+                                       CNPJ: <%= rows[i].cliente_cnpj %>
+                                    </h6>
+                                        <hr>
+                                </td>
+                                <td>
+                                    <a href="/home/cliente/lista/update/<%= rows[i].idcliente %>">
+                                        <button class="btn btn-success">Editar</button>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="/home/cliente/lista/delete/<%= rows[i].idcliente %>">
+                                        <button class="btn btn-danger">Deletar</button>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="/home/cliente/lista/detalhado/<%= rows[i].idcliente %>">
+                                        <button class="btn btn-success">Informações</button>
+                                    </a>
+                                </td>
+                                    <% } %>
+                            </tr>
+                        </tbody>
+                </table>
+                <div>
+                    <a href="/home/cliente/cadastro"><button class="btn btn-success">ADICIONAR CLIENTE</button></a>
+                </div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/registro.css">
+    <title>REGISTRO USUARIO</title>
+</head>
+<body>
+
+    <%- include('./partials/menuTopo.ejs'); %>
+    
+        <form action="/registroservice" method="post">
+            <div class="conteiner">
+
+                <div class="dadospessoais">
+                        <div>
+                            <div class="titulo">
+                                <p>DADOS PESSOAIS</p>
+                            </div>
+                            <input type="text" name="nome" placeholder="NOME">
+                            <input type="text" name="sobrenome" placeholder="SOBRENOME">
+                            <input type="text" name="usuario" placeholder="NICK USUARIO">
+                            <input type="number" name="rg" placeholder="RG">
+                            <input type="number" name="cpf" placeholder="CPF">
+                            <input type="text" name="nascimento" placeholder="DATA DE NASCIMENTO">
+                            <input type="text" name="endereco" placeholder="ENDEREÇO">
+                        </div>
+                </div>
+                <div class="dadosempresa">
+                    <div>
+                        <div class="titulo">
+                            <p>DADOS EMPRESA</p>
+                        </div>
+                        <input type="text" name="admissao" placeholder="ADMISSÃO">
+                        <input type="text" name="demissao" placeholder="DEMISSÃO">
+                        <input type="number" name="salario" placeholder="SALARIO">
+                        <input type="text" name="funcao" placeholder="FUNÇÃO"><br>
+                        <label for="">Operador</label>
+                        <select name="condicao">
+                            <option value="1">ADM</option>
+                            <option value="0">Normal</option>
+                        </select><br><br>
+                        <p>* Para preenxer o campo DEMISSÃO em uma posterioridade, acesse a area editar cadastro de funcionarios</p>
+                    </div>
+                </div>
+
+                <div class="dadosfinais">
+                    <div>
+                        <div class="titulo">
+                            <p>DADOS USUARIO</p>
+                        </div>
+                        <div class="inputform">
+                            <input type="password" name="senha" placeholder="SENHA">
+                            <input type="password" name="confirmarsenha" placeholder="CONFIRMAR SENHA">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="botao">
+                    <button class="Bcadastrar">CADASTRAR</button>
+                </div>
+            </div>
+            <div>
+
+            </div>
+        </form>
+        <button>
+            <p>OPEN</p>
+        </button>
+</body>
+</html>

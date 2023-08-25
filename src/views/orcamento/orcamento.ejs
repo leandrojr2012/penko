@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/orcamento.css">
+    <title>ORCAMENTO</title>
+</head>
+<body>
+    <%- include('../partials/menuTopo.ejs'); %>
+
+    <div class="conteiner">
+    
+    <form action="/orcamento_service" method="POST">
+        <div class="first">
+        <label>Orçamento Nº:
+            <input type="text" name="numero_pedido" value=" <%= rows_numero_pedido[0][0].numero + 1 %> ">  
+        </label>
+            <br><br>
+        <label>Cliente:</label>
+                        <select name="tipo_cliente" id="tipo_cliente">
+                            <% for(let i in rows_cliente){ %>
+                                <option value="<%= rows_cliente[i].idcliente %>"><%= rows_cliente[i].cliente_nome_fantasia %></option>
+                            <% } %>
+                        </select><br><br>
+        <label>Serviço:</label>
+                        <select name="tipo_servico" id="tipo_servico">
+                            <% for(let i in rows_servico){ %>
+                                <option  value="<%= rows_servico[i].idservico %>"><%= rows_servico[i].servico_tipo %></option>
+                            <% } %>
+                        </select>
+        <label>Descrição: </label>
+                        <select name="tipo_descricao" id="tipo_descricao">
+                            <% for(let i in rows_descricao){ %>
+                                <option value="<%= rows_descricao[i].idcliente_desc_peca %>"><%= rows_descricao[i].cliente_desc_pc_descricao %></option>
+                            <% } %>
+                        </select><br><br>
+        <label >Diametro(mm):</label>
+            <input type="number" id="diametro" name="diametro" placeholder="Ex: 200 ">
+        <label>Comprimento(mm):</label>
+            <input type="text" id="comprimento" name="comprimento" placeholder="Ex: 1000">
+        <label>Quantidade:</label>
+            <input type="number" id="quantidade" name="quantidade" placeholder="Ex: 3"> 
+        <label>Unidde:</label>
+                        <select name="tipo_unidade" id="tipo_unidade">
+                            <% for(let i in rows_unidade){ %>
+                            <option value="<%= rows_unidade[i].idunidade %>"><%= rows_unidade[i].unidade_tipo_un %></option>
+                            <% } %>
+                        </select><br><br>
+        <label>Camada:</label>
+            <input type="number" id="camada" name="camada" placeholder="Ex: 0.5"> 
+        <label>Fator X:
+            <input type="number" id="fatorx" name="fatorx" placeholder="Ex: 19"><br><br>
+        </label>
+
+        <button type="button" onclick="calcular(document.getElementById('diametro').value, document.getElementById('comprimento').value, document.getElementById('fatorx').value)">Calcular</button>
+        <p>Valor Unitario: </p><p id="exibir_val_uni"></p><br><br>
+
+        <button type="button" class="btn btn-success" 
+        onclick="adicionar(
+        document.getElementById('tipo_servico').value, 
+        document.getElementById('tipo_descricao').value, 
+        document.getElementById('tipo_unidade').value, 
+        document.getElementById('camada').value, 
+        document.getElementById('quantidade').value, 
+        document.getElementById('diametro').value, 
+        document.getElementById('comprimento').value,
+        document.getElementById('fatorx').value 
+                            )">ADICIONAR</button><br><br>
+
+        </div>
+        <div class="second">  
+                    <table border="1">
+                <tbody id="tbody">
+                    <tr>
+                        <td>Serviço
+                        </td>
+                        <td>Descrição
+                        </td>
+                        <td>Camada
+                        </td>
+                        <td>QTD
+                        </td>
+                        <td>Unidade
+                        </td>
+                        <td>Valor Unitario
+                        </td>
+                        <td>Sub Total
+                        </td>
+                    </tr>
+                </tbody>
+            </table><br><br>
+            <label>VALOR TOTAL:
+                <p name="Vtotal" id="Vtotal"></p>
+            </label><br><br>
+
+        </div>
+        <div class="third">
+        <label>Frete:</label>
+        <select name="frete">
+            <option value="sim">SIM</option>
+            <option value="nao">NÃO</option>
+        </select>
+        <input type="text" name="fretevalor" placeholder="Ex: (Valor do FRETE) 250"><br><br>
+
+        <label>Pagamento:</label>
+        <select name="pagamento">
+            <option value="a_vista">A vista</option>
+            <option value="prazo 1X">A prazo 1X</option>
+            <option value="prazo 2X">A prazo 2X</option>
+            <option value="prazo 3X">A prazo 3X</option>
+            <option value="prazo + 3X">A prazo + 3X</option>
+
+        </select>
+        <input type="number" name="pagamento_forma_parcelado" placeholder="Ex: 7x"><br><br>
+
+        <label>Prazo de entrga:</label>
+        <input type="number" name="prazo_entrega" placeholder="Ex: 4 dias"><br><br>
+
+        <label>Desconto:</label>
+        <input type="number" name="desconto" placeholder="Ex: 100"><br><br>
+
+        <button type="submit">OK</button>
+
+    </form>
+</div>
+</body>
+
+<script>
+
+         let serviços = []
+
+
+        function calcular(diametro, comprimento, fatorx){
+        
+        let pi = 3.14
+        
+        let decimetro = (diametro * comprimento * pi) / 10000
+
+        let val_uni = decimetro * fatorx
+
+        let val_uni_exi = document.getElementById('exibir_val_uni')
+
+        val_uni_exi.innerText = val_uni
+
+        }  
+
+
+        async function adicionar(tipo_servico, tipo_descricao, tipo_unidade, camada, quantidade, diametro, comprimento, fatorx){
+
+            let data_unidade 
+            let data_servico
+            let data_descricao
+            let pi = 3.14
+            let decimetro = (diametro * comprimento * pi) / 10000
+
+            await fetch(`http://localhost:8080/home/orcamento/servico/${tipo_servico}?`, {
+                 }).then(response =>{  
+                     return response.json()
+                   .then(data_ser =>{
+
+                    if(data_ser){
+                        data_servico = data_ser
+                    }
+
+                   })
+                   }).catch((error_servico)=>{console.log(error_servico)})
+
+            await fetch(`http://localhost:8080/home/orcamento/descricao/${tipo_descricao}?`, {
+                }).then(response =>{  
+                    return response.json()
+                    .then(data_des =>{
+
+                    if(data_des){
+                        data_descricao = data_des
+                    }
+                    })
+                    }).catch((error_descricao)=>{console.log(error_descricao)})
+
+            await fetch(`http://localhost:8080/home/orcamento/unidade/${tipo_unidade}?`, {
+                }).then(response =>{  
+                    return response.json()
+                    .then(data_uni =>{
+
+                    if(data_uni){
+                        data_unidade = data_uni
+                    }
+
+                    })
+                    }).catch((error_unidade)=>{console.log(error_unidade)})
+
+
+// primeira tabela
+            let tbody =  document.getElementById('tbody')
+            let tr =  tbody.insertRow()
+            let td_servico =  tr.insertCell()
+            let td_descricao =  tr.insertCell()
+            let td_camada = tr.insertCell()
+            let td_quantidade = tr.insertCell()
+            let td_unidade = tr.insertCell()
+            let td_valorUnit = tr.insertCell()
+            let td_subTotal = tr.insertCell() 
+
+
+            let inputServico = document.createElement('input')
+            inputServico.setAttribute("type", "hidden")
+            inputServico.setAttribute("name", "servico[]")
+
+            let inputDescricao = document.createElement('input')
+            inputDescricao.setAttribute("type", "hidden")
+            inputDescricao.setAttribute("name", "descricao[]")
+
+            let inputDiametro = document.createElement('input')
+            inputDiametro.setAttribute("type", "hidden")
+            inputDiametro.setAttribute("name", "diametro[]")
+
+            let inputComprimento = document.createElement('input')
+            inputComprimento.setAttribute("type", "hidden")
+            inputComprimento.setAttribute("name", "comprimento[]")
+
+            let inputQuantidade = document.createElement('input')
+            inputQuantidade.setAttribute("type", "hidden")
+            inputQuantidade.setAttribute("name", "quantidade[]")
+
+            let inputUnidade = document.createElement('input')
+            inputUnidade.setAttribute("type", "hidden")
+            inputUnidade.setAttribute("name", "unidade[]")
+
+            let inputCamada = document.createElement('input')
+            inputCamada.setAttribute("type", "hidden")
+            inputCamada.setAttribute("name", "camada[]")
+
+            let inputFatorx = document.createElement('input')
+            inputFatorx.setAttribute("type", "hidden")
+            inputFatorx.setAttribute("name", "fatorx[]")
+
+            let inputValorUnit = document.createElement('input')
+            inputValorUnit.setAttribute("type", "hidden")
+            inputValorUnit.setAttribute("name", "valorunit[]")
+
+            let inputSubTotal = document.createElement('input')
+            inputSubTotal.setAttribute("type", "hidden")
+            inputSubTotal.setAttribute("name", "subtotal[]")
+
+            /*let inputValorTotal = document.createElement('input')
+            inputValorTotal.setAttribute("type", "hidden")
+            inputValorTotal.setAttribute("name", "valorTotal[]")*/
+
+            let inputTotal = document.createElement('input')
+            inputTotal.setAttribute("type", "hidden")
+            inputTotal.setAttribute("name", "totalinp[]")
+
+
+    // ARRAY        
+                serviços.push({     serviço_id: data_servico.rows_orcamento_servico[0].idservico,
+                                    serviço_tipo: data_servico.rows_orcamento_servico[0].servico_tipo,
+                                    descricao_id: data_descricao.rows_orcamento_descricao[0].idcliente_desc_peca,
+                                    descricao_tipo: data_descricao.rows_orcamento_descricao[0].cliente_desc_pc_descricao,
+                                    diametro: diametro,
+                                    comprimento: comprimento,
+                                    quantidade:quantidade,
+                                    unidade_id: data_unidade.rows_orcamento_unidade[0].idunidade,
+                                    unidade_tipo: data_unidade.rows_orcamento_unidade[0].idunidade,
+                                    camada: camada,
+                                    fatorx: fatorx,
+                                    valor_uni: decimetro * fatorx,
+                                    subtotal: decimetro * fatorx * quantidade, 
+                                })
+
+
+            for (let i in serviços){
+                td_servico.innerText = serviços[i].serviço_tipo
+                td_servico.appendChild(inputServico)
+                inputServico.setAttribute("value", serviços[i].serviço_id)
+            }
+
+            for (let i in serviços){
+                td_descricao.innerText = serviços[i].descricao_tipo + ' ' + diametro + ' X ' + comprimento
+                td_descricao.appendChild(inputDescricao)
+                inputDescricao.setAttribute("value", serviços[i].descricao_id)
+
+            }
+
+            for (let i in serviços){
+                td_camada.innerText = serviços[i].camada
+                td_camada.appendChild(inputCamada)
+                inputCamada.setAttribute("value", serviços[i].camada)
+            }
+
+            for (let i in serviços){
+                td_descricao.appendChild(inputDiametro)
+                inputDiametro.setAttribute("value", serviços[i].diametro)
+            }
+
+            for (let i in serviços){
+                td_descricao.appendChild(inputComprimento)
+                inputComprimento.setAttribute("value", serviços[i].comprimento)
+            }
+
+            
+            for (let i in serviços){
+                inputFatorx.setAttribute("value", serviços[i].fatorx)
+            }
+
+            for (let i in serviços){
+                td_quantidade.innerText = serviços[i].quantidade
+                td_quantidade.appendChild(inputQuantidade)
+                inputQuantidade.setAttribute("value", serviços[i].quantidade)
+            }
+
+            for (let i in serviços){
+                td_unidade.innerText = serviços[i].unidade_tipo
+                td_unidade.appendChild(inputUnidade)
+                inputUnidade.setAttribute("value", serviços[i].unidade_id)
+            }
+
+            for(let i in serviços){
+                td_valorUnit.innerText = serviços[i].valor_uni
+                td_valorUnit.appendChild(inputValorUnit)
+                inputValorUnit.setAttribute("value", serviços[i].valor_uni)
+            }
+
+            for(let i in serviços){
+                td_subTotal.innerText = serviços[i].subtotal
+                td_subTotal.appendChild(inputSubTotal)
+                inputSubTotal.setAttribute("value", serviços[i].subtotal)
+            }
+
+            let total = serviços.reduce(getTotal, 0);
+            function getTotal(total, item) {
+            return total + (item.valor_uni * item.quantidade);
+            }
+
+            let totalExibir = document.getElementById('Vtotal')
+
+            totalExibir.innerText = total
+            totalExibir.appendChild(inputTotal)
+            inputTotal.setAttribute("value", total)
+
+    }
+    
+
+</script>
+</html>

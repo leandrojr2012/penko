@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/cliente.css">
+    <title>CADASTRO CLIENTE</title>
+</head>
+<body>
+
+    <%- include('../partials/menuTopo.ejs'); %>
+
+        <form action="/cadastro_cliente_service" method="post">
+
+
+            <div class="conteiner">
+                <div class="titulo_form">
+                    <h2>Cadastro de Cliente</h2>
+                </div>
+                <div class="dadospessoais">
+                        <div>
+                            <div class="titulo">
+                                <p>DADOS CADASTRAIS</p>
+                            </div>
+                            <label >ºNome Fantasia:</label>
+                            <input type="text" name="nome_fantasia" placeholder="Ex: Cromoduro Poliman"><br><br>
+                            <label for="">Razao Social:</label>
+                            <input type="text" name="razao_social" placeholder="Ex: Luiz Penko Felisbino - ME"><br><br>
+                            <label for="">CNPJ:</label>
+                            <input type="number" name="cnpj" placeholder="Ex: 12.345.678/0001-00"><br><br>
+                            <label for="">Inscrição Estadual:</label>
+                            <input type="number" name="i_e" placeholder="Ex: 123.456.789.000"><br><br>
+                        </div>
+                </div>
+                <div class="dadosempresa">
+                    <div>
+                        <div class="titulo">
+                            <p>DADOS EMPRESA</p>
+                        </div>
+                        <label>Endereço:</label>
+                        <input type="text" name="endereço" placeholder="Ex: Av. Interdistrital  957"><br><br>
+                        <label>Cidade:</label>
+                        <input type="text" name="cidade" placeholder="Ex: Santa Barbara d` Oeste"><br><br>
+                        <label>Bairro:</label>
+                        <input type="text" name="bairro" placeholder="Ex: Distrito Industrial"><br><br>
+                        <label>CEP:</label><br>
+                        <input type="number" name="cep" placeholder="Ex: 13.450-000"><br><br>
+                        <label for="">UF</label>
+                        <select name="uf">
+                            <option value="sp">SP</option>
+                            <option value="rj">RJ</option>
+                            <option value="mg">MG</option>
+                            <option value="rs">RS</option>
+                        </select><br><br>
+                        <label>Contato Celular:</label>
+                        <input type="number" name="cont_cel" placeholder="Ex: 19 99912 3456"><br><br>
+                        <label>Contato WHATSAPP:</label>
+                        <input type="number" name="cont_whats" placeholder="Ex: 19 99912 3456"><br><br>
+                        <label>Contato Fixo:</label>
+                        <input type="number" name="cont_fixo" placeholder="Ex: 19 3454 1234"><br><br>
+                        <label>EMAIL:</label>
+                        <input type="text" name="email" placeholder="Ex: Penko@penko.com.br"><br><br>
+                    </div>
+                </div>
+
+                <div class="dadosfinais">
+                    <div>
+                        <div class="titulo">
+                            <p>DADOS CONTATO</p>
+                        </div>
+                        <div class="inputform">
+                            <label>Nome Responsavel:</label>
+                            <input type="text" name="nome_resp" placeholder="Ex: Fabio"><br><br>
+                            <label >Cargo:</label>
+                            <input type="text" name="cargo" placeholder="Ex: Administrador"><br><br>
+                            <label>Observações:</label>
+                            <textarea name="obs" cols="30" rows="10" placeholder="Ex: Digite aqui as observações necessarias!"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+                    
+                    <div class="botao">
+                        <button class="Bcadastrar">CADASTRAR</button>
+                    </div>
+
+            </div>
+            <div>
+
+            </div>
+        </form>
+</body>
+</html>

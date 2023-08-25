@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <title>LISTA CLIENTE DETALHADO</title>
+</head>
+<body>
+    <%- include('../partials/menuTopo.ejs'); %>
+    <div class="container mt-4">
+        <h2>Informações Cliente</h2>
+            <hr>
+            <div class="container">Cliente ID: <%= idUrl %></div>
+                <table>
+                    <% for(let i=0; i<rows.length; i++) {%>
+                        <tbody>
+                            <tr>
+                                <td class="linhas">
+                                    <h3>
+                                       Nome: <%= rows[i].cliente_nome_fantasia %>
+                                    </h3>
+                                    <h5>
+                                       Razao Social: <%= rows[i].cliente_razao_social %>
+                                    </h5>
+                                    <h5>
+                                       CNPJ: <%= rows[i].cliente_cnpj %>
+                                    </h5>
+                                    <h5>
+                                       Inscrição Estadual: <%= rows[i].cliente_insc_estadual %>
+                                    </h5>
+                                    <h5>
+                                       Endereço: <%= rows[i].cliente_endereço %>
+                                    </h5>
+                                    <h5>
+                                       Cidade: <%= rows[i].cliente_cidade %>
+                                    </h5>
+                                    <h5>
+                                        Bairro: <%= rows[i].cliente_bairro %>
+                                     </h5>
+                                     <h5>
+                                        CEP: <%= rows[i].cliente_cep %>
+                                     </h5>
+                                     <h5>
+                                        UF: <%= rows[i].cliente_uf %>
+                                     </h5>
+                                     <h5>
+                                        Contato Celular: <%= rows[i].cliente_cont_cel %>
+                                     </h5>
+                                     <h5>
+                                        Contato Whatsapp: <%= rows[i].cliente_cont_whats %>
+                                     </h5>
+                                     <h5>
+                                        Contato Fixo: <%= rows[i].cliente_cont_fixo %>
+                                     </h5>
+                                     <h5>
+                                        Email: <%= rows[i].cliente_email %>
+                                     </h5>
+                                     <h5>
+                                        Nome do Contato Responsavel: <%= rows[i].cliente_nome_resp %>
+                                     </h5>
+                                     <h5>
+                                        Cargo: <%= rows[i].cliente_cargo %>
+                                     </h5>
+                                     <h5>
+                                        OBSERVAÇÕES: <%= rows[i].cliente_obs %>
+                                     </h5>
+                                        <hr>
+                                </td>
+                        </tbody>
+                    <% }%>
+                </table>
+                <div>
+                    <a href="/home/cliente/lista"><button class="btn btn-success">lista CLIENTE(s)</button></a>
+                </div>
+    </div>
+    
+</body>
+</html>
