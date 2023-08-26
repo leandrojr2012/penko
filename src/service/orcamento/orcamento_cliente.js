@@ -20,13 +20,10 @@ async function orcamento_cliente(orcamento_id_cliente, orcamento_id_servico, orc
         
 
         for (let i in orcamento_id_servico){
-                //console.log('numero orcamento: ' + orcamento_descricao_id_orcamento)
-                //console.log('total: ' + orcamento_valor_total)
-                console.log('console.log do diametro: ' + orcamento_diametro_peca[i])
 
         await db.insert({   orcamento_id_servico: orcamento_id_servico[i], 
                             orcamento_id_cliente_desc_peca: orcamento_id_cliente_desc_peca[i],
-                            orcamento_diametro_peca: Number( orcamento_diametro_peca[i]),
+                            orcamento_diametro_peca: Number(orcamento_diametro_peca[i]),
                             orcamento_comprimento_peca: Number(orcamento_comprimento_peca[i]), 
                             orcamento_id_unidade: orcamento_id_unidade[i],
                             orcamento_camada_peca: Number(orcamento_camada_peca[i]),

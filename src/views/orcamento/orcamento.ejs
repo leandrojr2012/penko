@@ -205,47 +205,43 @@
 
             let inputServico = document.createElement('input')
             inputServico.setAttribute("type", "hidden")
-            inputServico.setAttribute("name", "servico[]")
+            inputServico.setAttribute("name", "arrayservico[]")
 
             let inputDescricao = document.createElement('input')
             inputDescricao.setAttribute("type", "hidden")
-            inputDescricao.setAttribute("name", "descricao[]")
+            inputDescricao.setAttribute("name", "arraydescricao[]")
 
             let inputDiametro = document.createElement('input')
             inputDiametro.setAttribute("type", "hidden")
-            inputDiametro.setAttribute("name", "diametro[]")
+            inputDiametro.setAttribute("name", "arraydiametro[]")
 
             let inputComprimento = document.createElement('input')
             inputComprimento.setAttribute("type", "hidden")
-            inputComprimento.setAttribute("name", "comprimento[]")
+            inputComprimento.setAttribute("name", "arraycomprimento[]")
 
             let inputQuantidade = document.createElement('input')
             inputQuantidade.setAttribute("type", "hidden")
-            inputQuantidade.setAttribute("name", "quantidade[]")
+            inputQuantidade.setAttribute("name", "arrayquantidade[]")
 
             let inputUnidade = document.createElement('input')
             inputUnidade.setAttribute("type", "hidden")
-            inputUnidade.setAttribute("name", "unidade[]")
+            inputUnidade.setAttribute("name", "arrayunidade[]")
 
             let inputCamada = document.createElement('input')
             inputCamada.setAttribute("type", "hidden")
-            inputCamada.setAttribute("name", "camada[]")
+            inputCamada.setAttribute("name", "arraycamada[]")
 
             let inputFatorx = document.createElement('input')
             inputFatorx.setAttribute("type", "hidden")
-            inputFatorx.setAttribute("name", "fatorx[]")
+            inputFatorx.setAttribute("name", "arrayfatorx[]")
 
             let inputValorUnit = document.createElement('input')
             inputValorUnit.setAttribute("type", "hidden")
-            inputValorUnit.setAttribute("name", "valorunit[]")
+            inputValorUnit.setAttribute("name", "arrayvalorunit[]")
 
             let inputSubTotal = document.createElement('input')
             inputSubTotal.setAttribute("type", "hidden")
-            inputSubTotal.setAttribute("name", "subtotal[]")
-
-            /*let inputValorTotal = document.createElement('input')
-            inputValorTotal.setAttribute("type", "hidden")
-            inputValorTotal.setAttribute("name", "valorTotal[]")*/
+            inputSubTotal.setAttribute("name", "arraysubtotal[]")
 
             let inputTotal = document.createElement('input')
             inputTotal.setAttribute("type", "hidden")
@@ -257,13 +253,13 @@
                                     serviço_tipo: data_servico.rows_orcamento_servico[0].servico_tipo,
                                     descricao_id: data_descricao.rows_orcamento_descricao[0].idcliente_desc_peca,
                                     descricao_tipo: data_descricao.rows_orcamento_descricao[0].cliente_desc_pc_descricao,
-                                    diametro: diametro,
+                                    diametro,
                                     comprimento: comprimento,
                                     quantidade:quantidade,
                                     unidade_id: data_unidade.rows_orcamento_unidade[0].idunidade,
-                                    unidade_tipo: data_unidade.rows_orcamento_unidade[0].idunidade,
+                                    unidade_tipo: data_unidade.rows_orcamento_unidade[0].unidade_tipo_un,
                                     camada: camada,
-                                    fatorx: fatorx,
+                                    fatorx,
                                     valor_uni: decimetro * fatorx,
                                     subtotal: decimetro * fatorx * quantidade, 
                                 })
@@ -283,15 +279,17 @@
             }
 
             for (let i in serviços){
+                td_descricao.appendChild(inputDiametro)
+                inputDiametro.setAttribute("value", serviços[i].diametro)
+            }
+
+            for (let i in serviços){
                 td_camada.innerText = serviços[i].camada
                 td_camada.appendChild(inputCamada)
                 inputCamada.setAttribute("value", serviços[i].camada)
             }
 
-            for (let i in serviços){
-                td_descricao.appendChild(inputDiametro)
-                inputDiametro.setAttribute("value", serviços[i].diametro)
-            }
+
 
             for (let i in serviços){
                 td_descricao.appendChild(inputComprimento)

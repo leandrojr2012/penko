@@ -56,13 +56,13 @@ exports.orcamento_service = (req, res) =>{
 
     const dados = req.body
     const orcamento_id_cliente = dados.tipo_cliente
-    const orcamento_id_servico = dados.servico
-    const orcamento_id_cliente_desc_peca = dados.descricao
-    const orcamento_diametro_peca = dados.diametro
-    const orcamento_comprimento_peca = dados.comprimento
-    const orcamento_id_unidade = dados. unidade
-    const orcamento_camada_peca = dados.camada
-    const orcamento_fator_x = dados.fatorx
+    const orcamento_id_servico = dados.arrayservico
+    const orcamento_id_cliente_desc_peca = dados.arraydescricao
+    const orcamento_diametro_peca = dados.arraydiametro
+    const orcamento_comprimento_peca = dados.arraycomprimento
+    const orcamento_id_unidade = dados.arrayunidade
+    const orcamento_camada_peca = dados.arraycamada
+    const orcamento_fator_x = dados.arrayfatorx
     const orcamento_frete = dados.frete
     const orcamento_frete_valor = dados.fretevalor
     const orcamento_pagamento = dados.pagamento
@@ -71,8 +71,10 @@ exports.orcamento_service = (req, res) =>{
     const orcamento_desconto = dados.desconto
     const orcamento_valor_total = dados.totalinp
     const orcamento_descricao_id_orcamento = dados.numero_pedido
-    console.log('teste req.body: ' + dados)
-    console.log('teste dados diametro: ' + orcamento_diametro_peca)
+
+    console.log('teste req.body: ' + req.body)
+    console.log('teste diametro: ' + orcamento_diametro_peca)
+    console.log(JSON.stringify(req.body, null, 4))
 
     orcamento_cliente(orcamento_id_cliente, orcamento_id_servico, orcamento_id_cliente_desc_peca,
         orcamento_diametro_peca, orcamento_comprimento_peca, orcamento_id_unidade, 
