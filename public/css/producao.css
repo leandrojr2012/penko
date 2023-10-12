@@ -1,0 +1,156 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    }
+    
+    body{
+    background-color: white;
+    }   
+
+    .inf{
+        display: flex;
+        justify-content:space-between;
+        align-items: center;
+        width: 100%;
+        padding: 1vh;
+        padding-right: 3vh;
+        padding-left: 4vh;
+        background-color: white;
+        color:  #4b4b4b;
+        font-size: 2.5vh;
+        font-family:Arial, Helvetica, sans-serif;
+
+    }
+
+    .inf_total{
+        background-color: rgb(69, 69, 163);
+        color: white;
+        border: 1px solid ;
+        padding-left: 1vh;
+        padding-right: 1vh;
+        border-radius: 5px;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+
+    button{
+        color: #4b4b4b;
+        background-color: white;
+        padding: 0.6vh;
+        border-radius: 2px;
+        border: 3px solid white;
+        cursor: pointer;
+        
+    }
+
+    input{
+        color: rgb(121, 121, 121);
+        padding: 0.6vh;
+        border-radius: 2px;
+        border: 2px solid white;
+
+    }
+
+    select{
+        color: rgb(121, 121, 121);
+        border: 2px solid white;
+        padding: 0.6vh;
+    }
+
+    label{
+        font-size: 2.5vh;
+        color: rgb(121, 121, 121);
+    }
+
+    .p_edicao{
+        color: white;
+    }
+
+    table{
+        width: 100%;
+        border-collapse: collapse
+    }
+
+    tr{
+        border: 1px solid transparent;
+    }
+
+    th{
+        padding: 1vh;
+        font-size: large;
+        font-family: 'Courier New', Courier, monospace;
+        color: #3d3d3d;
+    }
+
+    td{
+        padding: 1vh;
+        font-size: 1.8vh;
+        font-family:Arial, Helvetica, sans-serif;
+        color: #4b4b4b;
+        text-align: left;
+    }
+
+    tr:nth-child(odd) {
+        background-color:#ffffff;
+    }
+
+    tr:nth-child(even) {
+        background-color:#f0f0f0;
+    }
+
+    table tr.table_tr{
+        border: 1.5px solid #d6d6d6;
+        padding: 1vh;
+    }
+
+    .table_td_id_os{
+        border: 1px solid #d6d6d6;
+        background-color: #e4e4e4;
+    }
+
+    .table_td_status{
+        background-color: red;
+        border-bottom: 2px solid #d6d6d6;
+    }
+
+    .table_tr_th{
+        width: 20vh;
+        font-size: 2.5vh;
+    }
+
+     .fa-solid.fa-pen-to-square{
+        width: 20vh;
+    }
+
+    .fa-solid.fa-magnifying-glass{
+        width: 20vh;
+    }
+
+    .table_td_id_os{
+        width: 5%;
+    }
+
+    .selecao{
+        width: 100%;
+        margin-bottom: 5vh;
+        display: flex;;
+        align-items:end;
+        background-color: rgb(69, 69, 163);
+        padding: 1.5vh;
+
+    }
+
+    .selecao_geral{
+        margin-left: 1vh;
+        font-family:Arial, Helvetica, sans-serif;
+        font-size: 1.8vh;
+        color: #808080;
+    }
+
+    .carregar_lista{
+        
+    }
+
+
+
+

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/entrada.css">
+    <title>ENTRADA</title>
+</head>
+<body>
+    <%- include('../partials/menuTopo.ejs'); %>
+    
+    <div class="conteiner">
+
+
+
+        <form action="/entrada_service" method="post">
+
+            <label>Entrada Nº:
+                <input type="text" name="numero_entrada" value=" <%= rows_numero_entrada[0][0].numero + 1 %> ">  
+            </label>
+                <br><br>
+
+            <label>Cliente:
+                <select name="cliente" id="cliente">
+                    <% for(let i in rows_cliente){ %>
+                    <option value="<%= rows_cliente[i].idcliente %>"><%= rows_cliente[i].cliente_nome_fantasia %></option>
+                    <% } %>
+                </select>
+            </label><br><br>
+
+            <label>Serviço:
+                <select name="servico" id="servico">
+                    <% for(let i in rows_servico){ %>
+                    <option value="<%= rows_servico[i].idservico %>"><%= rows_servico[i].servico_tipo %></option>
+                    <% } %>
+                </select>
+            </label><br><br>
+            
+            <label>Descrição:
+                <select name="descricao" id="descricao">
+                    <% for(let i in rows_descricao){ %>
+                        <option value="<%= rows_descricao[i].idcliente_desc_peca %>"><%= rows_descricao[i].cliente_desc_pc_descricao %></option>
+                    <% } %>
+                    </select>
+            </label><br><br>
+
+            <label>Diametro(mm):
+                <input type="number" name="entrada_diametro" id="entrada_diametro" placeholder="260">
+            </label>
+
+            <label>Comprimento(mm):
+                <input type="number" name="entrada_comprimento" id="entrada_comprimento" placeholder="2000">
+            </label><br><br>
+
+             <label>Status:
+                <select name="status_entrada" id="status_entrada">
+                    <% for(let i in rows_status){ %>
+                    <option value="<%= rows_status[i].idstatus_entrada %>"><%= rows_status[i].status_entrada_status %></option>
+                    <% } %>
+                </select>
+            </label> <br><br>
+
+            <label>Valor: 
+                <input type="number" name="entrada_valor" id="entrada_valor" placeholder="2000">
+            </label><br><br>
+
+            <button type="submit">OK</button>
+
+
+        </form>
+
+    </div>
+
+</body>
+
+<script>
+
+
+
+</script>
+
+</html>

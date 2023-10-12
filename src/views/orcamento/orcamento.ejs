@@ -12,26 +12,26 @@
 
     <div class="conteiner">
     
-    <form action="/orcamento_service" method="POST">
+    <form action="/orcamento_service" method="POST">    
         <div class="first">
         <label>Orçamento Nº:
             <input type="text" name="numero_pedido" value=" <%= rows_numero_pedido[0][0].numero + 1 %> ">  
         </label>
             <br><br>
         <label>Cliente:</label>
-                        <select name="tipo_cliente" id="tipo_cliente">
+                        <select name="cliente" id="cliente">
                             <% for(let i in rows_cliente){ %>
                                 <option value="<%= rows_cliente[i].idcliente %>"><%= rows_cliente[i].cliente_nome_fantasia %></option>
                             <% } %>
                         </select><br><br>
         <label>Serviço:</label>
-                        <select name="tipo_servico" id="tipo_servico">
+                        <select name="servico" id="servico">
                             <% for(let i in rows_servico){ %>
                                 <option  value="<%= rows_servico[i].idservico %>"><%= rows_servico[i].servico_tipo %></option>
                             <% } %>
                         </select>
         <label>Descrição: </label>
-                        <select name="tipo_descricao" id="tipo_descricao">
+                        <select name="descricao" id="descricao">
                             <% for(let i in rows_descricao){ %>
                                 <option value="<%= rows_descricao[i].idcliente_desc_peca %>"><%= rows_descricao[i].cliente_desc_pc_descricao %></option>
                             <% } %>
@@ -43,13 +43,14 @@
         <label>Quantidade:</label>
             <input type="number" id="quantidade" name="quantidade" placeholder="Ex: 3"> 
         <label>Unidde:</label>
-                        <select name="tipo_unidade" id="tipo_unidade">
+                        <select name="unidade" id="unidade">
                             <% for(let i in rows_unidade){ %>
                             <option value="<%= rows_unidade[i].idunidade %>"><%= rows_unidade[i].unidade_tipo_un %></option>
                             <% } %>
                         </select><br><br>
-        <label>Camada:</label>
+        <label>Camada:
             <input type="number" id="camada" name="camada" placeholder="Ex: 0.5"> 
+        </label>
         <label>Fator X:
             <input type="number" id="fatorx" name="fatorx" placeholder="Ex: 19"><br><br>
         </label>
@@ -59,9 +60,9 @@
 
         <button type="button" class="btn btn-success" 
         onclick="adicionar(
-        document.getElementById('tipo_servico').value, 
-        document.getElementById('tipo_descricao').value, 
-        document.getElementById('tipo_unidade').value, 
+        document.getElementById('servico').value, 
+        document.getElementById('descricao').value, 
+        document.getElementById('unidade').value, 
         document.getElementById('camada').value, 
         document.getElementById('quantidade').value, 
         document.getElementById('diametro').value, 
@@ -83,6 +84,8 @@
                         <td>QTD
                         </td>
                         <td>Unidade
+                        </td>
+                        <td>Fator X
                         </td>
                         <td>Valor Unitario
                         </td>
@@ -147,7 +150,7 @@
         }  
 
 
-        async function adicionar(tipo_servico, tipo_descricao, tipo_unidade, camada, quantidade, diametro, comprimento, fatorx){
+        async function adicionar(servico, descricao, unidade, camada, quantidade, diametro, comprimento, fatorx){
 
             let data_unidade 
             let data_servico
@@ -155,7 +158,7 @@
             let pi = 3.14
             let decimetro = (diametro * comprimento * pi) / 10000
 
-            await fetch(`http://localhost:8080/home/orcamento/servico/${tipo_servico}?`, {
+            await fetch(`http://localhost:8080/home/servico/${servico}?`, {
                  }).then(response =>{  
                      return response.json()
                    .then(data_ser =>{
@@ -167,7 +170,7 @@
                    })
                    }).catch((error_servico)=>{console.log(error_servico)})
 
-            await fetch(`http://localhost:8080/home/orcamento/descricao/${tipo_descricao}?`, {
+            await fetch(`http://localhost:8080/home/descricao/${descricao}?`, {
                 }).then(response =>{  
                     return response.json()
                     .then(data_des =>{
@@ -178,7 +181,7 @@
                     })
                     }).catch((error_descricao)=>{console.log(error_descricao)})
 
-            await fetch(`http://localhost:8080/home/orcamento/unidade/${tipo_unidade}?`, {
+            await fetch(`http://localhost:8080/home/unidade/${unidade}?`, {
                 }).then(response =>{  
                     return response.json()
                     .then(data_uni =>{
@@ -199,8 +202,9 @@
             let td_camada = tr.insertCell()
             let td_quantidade = tr.insertCell()
             let td_unidade = tr.insertCell()
+            let td_fator_x = tr.insertCell() 
             let td_valorUnit = tr.insertCell()
-            let td_subTotal = tr.insertCell() 
+            let td_subTotal = tr.insertCell()
 
 
             let inputServico = document.createElement('input')
@@ -249,16 +253,16 @@
 
 
     // ARRAY        
-                serviços.push({     serviço_id: data_servico.rows_orcamento_servico[0].idservico,
-                                    serviço_tipo: data_servico.rows_orcamento_servico[0].servico_tipo,
-                                    descricao_id: data_descricao.rows_orcamento_descricao[0].idcliente_desc_peca,
-                                    descricao_tipo: data_descricao.rows_orcamento_descricao[0].cliente_desc_pc_descricao,
+                serviços.push({     serviço_id: data_servico.rows_servico[0].idservico,
+                                    serviço_tipo: data_servico.rows_servico[0].servico_tipo,
+                                    descricao_id: data_descricao.rows_descricao[0].idcliente_desc_peca,
+                                    descricao_tipo: data_descricao.rows_descricao[0].cliente_desc_pc_descricao,
                                     diametro,
-                                    comprimento: comprimento,
-                                    quantidade:quantidade,
-                                    unidade_id: data_unidade.rows_orcamento_unidade[0].idunidade,
-                                    unidade_tipo: data_unidade.rows_orcamento_unidade[0].unidade_tipo_un,
-                                    camada: camada,
+                                    comprimento,
+                                    quantidade,
+                                    unidade_id: data_unidade.rows_unidade[0].idunidade,
+                                    unidade_tipo: data_unidade.rows_unidade[0].unidade_tipo_un,
+                                    camada,
                                     fatorx,
                                     valor_uni: decimetro * fatorx,
                                     subtotal: decimetro * fatorx * quantidade, 
@@ -289,15 +293,14 @@
                 inputCamada.setAttribute("value", serviços[i].camada)
             }
 
-
-
             for (let i in serviços){
                 td_descricao.appendChild(inputComprimento)
                 inputComprimento.setAttribute("value", serviços[i].comprimento)
             }
 
-            
             for (let i in serviços){
+                td_fator_x.innerText = serviços[i].fatorx
+                td_fator_x.appendChild(inputFatorx)
                 inputFatorx.setAttribute("value", serviços[i].fatorx)
             }
 

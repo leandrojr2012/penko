@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/despesas.css">
+    <title>DESPESA VARIAVEL CADASTRAR</title>
+</head>
+<body>
+    
+    <%- include('../partials/menuTopo.ejs'); %>
+
+    <div class="conteiner">
+
+        <form action="/despesas_variaveis_cadastrar_service" method="post">
+
+            <label>Despesa Nome:
+                <input type="text" name="nome_despesa_variavel" placeholder="Bignoto">
+            </label><br><br>
+
+            <label>Despesa Tipo:
+                <input type="text" name="tipo_despesa_variavel" placeholder="Empresa de ferramentas">
+            </label>
+
+            <button type="submit" name="botao">ADICIONAR</button>
+
+        </form>
+
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css">
+    <link rel="stylesheet" href="/css/producao.css">
+
+    <title>Document</title>
+</head>
+<body>
+    <main>
+
+    <%- include('../partials/menuTopo.ejs'); %>
+
+    <form action="http://localhost:8080/home/producao" method="get">
+
+        <div class="selecao">
+            <div class="selecao_geral">
+                <p class="p_edicao">Período de: </p> 
+            </div>
+            <div class="selecao_geral">
+                <input class="input_color" id="input_data"  type="date"> 
+            </div>
+            <div class="selecao_geral">
+                <p class="p_edicao">a </p> 
+            </div>
+            <div class="selecao_geral">
+                <input class="input_color"  id="input_data" type="date"> 
+            </div>
+            <div class="selecao_geral">
+                <select class="input_color" name="" id="">
+                <% for(let i in rows_status){ %>
+                    <option value=""><%= rows_status[i].status_entrada_status %></option>
+                <% } %>
+                </select>
+            </div>
+            <div class="selecao_geral">
+                
+                <input type="search" name="input_search" id="input_search"  placeholder="Digite o numero da O.S. que procura!" >
+            </div>
+            <div class="selecao_geral">
+                <button type="submit" class="carregar_lista">
+                    <i class="fa-solid fa-rectangle-list"></i> Carregar Lista
+                </button>
+            </div>
+        </div>
+    </form>    
+    
+
+        <div class="tab">
+            <table>
+                    <tbody id="tbody">
+                        <tr class="table_tr">
+                            <th>O.S.</th>
+                            <th>Cliente</th>
+                            <th>Serviço</th>
+                            <th>Peça</th>
+                            <th>Dimensões (mm)</th>
+                            <th>Status</th>
+                            <th class="table_tr_th">Editar Status</th>
+                            <th class="table_tr_th">Visualizar</th>
+                        </tr>
+                        <% for(let i in rows) {%>
+                        <tr id="tr-<%= rows[i].identrada %>">
+                                <td class="table_td_id_os">
+                                    <p id="ido_s" style="display: flex; justify-content: center;"><%= rows[i].identrada %></p>
+                                </td>
+                                <td> 
+                                    <p  style="display: flex; justify-content: center;"><%= rows[i].cliente_nome_fantasia %></p>
+                                </td>
+                                <td>
+                                    <p style="display: flex; justify-content: center;"><%= rows[i].servico_tipo %></p>
+                                </td>
+                                <td>
+                                    <p style="display: flex; justify-content: center;"><%= rows[i].cliente_desc_pc_descricao %></p>
+                                </td>
+                                <td>
+                                    <p style="display: flex; justify-content: center;"><%= rows[i].entrada_desc_diametro %> X <%= rows[i].entrada_desc_comprimento %></p>
+                                </td>
+                                <td class="table_td_status" id="td-<%= rows[i].identrada %>-statusx">
+                                    <p style="display: flex; justify-content: center;"><%= rows[i].status_entrada_status %></p>
+                                </td>
+                                <td>
+                                    <i class="fa-solid fa-pen-to-square" id="edite" value="<%= rows[i].identrada %>" style="display: flex; justify-content: center;" onclick="modal(<%= rows[i].identrada %>)"></i>
+                                </td>
+                                <td>
+                                    <i class="fa-solid fa-magnifying-glass" style="display: flex; justify-content: center;"></i>
+                                </td>
+                        </tr>
+                        <% } %>
+
+                    </tbody>
+
+                </table>
+        </div>
+
+        <div class="inf">
+            <div>
+                <p><<    <    | Pagina 1  de 1 |    >    >>  </p>
+            </div>
+            <div class="inf_total">
+                <p> Você possui um total de:  <%= rows.length %> Peças na produção</p>
+            </div>
+     
+        </div>
+
+        <div class="modal" id="modal"  style="width: 90vh; height: 30vh; background-color: aqua; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display:none;">
+           
+            <p>valor os: </p> <p id="numero_os" value=""></p>
+
+            <div class="fechar" style="width: 9vh; height: 3vh; background-color: brown; float: inline-end; cursor: pointer;" onclick="fechar_modal()">Fechar X</div>
+            
+            <label>Status:</label>
+            <select name="status_modal" id="status_modal">
+                <% for(let i in rows_status){ %>
+                    <option  value="<%= rows_status[i].idstatus_entrada %>"><%= rows_status[i].status_entrada_status %></option>
+                <% } %>
+            </select>
+
+            <div class="salvar" id="edit_status"  style="width: 9vh; height: 3vh; background-color: brown; float: inline-start; cursor: pointer;" onclick="salvar_modal()">
+            EDITAR
+            </div>
+        </div>
+        <br><br><br>
+
+
+    
+    </main>
+
+</body>
+<script>
+
+    let lista = []
+
+    async function buscar(){
+
+        let data_search
+
+        let search = document.getElementById('input_search').value
+
+        await fetch(`http://localhost:8080/home/entradas_producao/${search}?`, {
+                 }).then(response =>{  
+                     return response.json()
+                   .then(data_sea =>{
+
+                    if(data_sea){
+                        data_search = data_sea
+                    }
+
+                   })
+                   }).catch((error_search)=>{console.log(error_search)})
+
+        console.log('teste: ' + data_search)
+
+        let tbody =  document.getElementById('tbody')
+        let tr =  tbody.insertRow()
+        let td_search =  tr.insertCell()
+
+        buscar.push({
+                        search_id: data_search
+                    })
+
+    }
+
+    function cor_status(){
+
+    }
+    
+    function modal(id){
+        let modal = document.querySelector('.modal')
+
+        modal.style.display = 'block';
+
+        let valor = document.getElementById('edite').value
+        let display = document.getElementById('numero_os')
+        display.innerHTML = "<h3>"+id+"</h3>";
+        display.setAttribute("value", id)
+    }
+
+    function fechar_modal(){
+        let modal = document.querySelector('.modal')
+
+        modal.style.display = 'none'
+    }
+
+    function salvar_modal(){
+
+        let new_status = document.getElementById('status_modal').value 
+        let ido_s      = document.getElementById('numero_os').getAttribute("value")
+
+        let data = {new_status, ido_s}
+        
+        console.log('teste front / status: ' + data.new_status + ' id: ' + data.ido_s)
+        
+        fetch("http://localhost:8080/teste", {
+                method: "PUT",
+                body: JSON.stringify(data),
+                headers: {"Content-type": "application/json; charset=UTF-8"}          
+            }).then(function(response){
+
+                response.json().then(dados => {
+                    const tr = document.getElementById('tr-'+ido_s)
+                    tr.children[5].innerHTML = dados.descricao
+                })
+
+            })
+            .catch((err) => {
+                console.log(err)
+                alert("Erro ao efetivar alteracoes")
+                return res.status(400).json({
+                    erro:true,
+                    mensagem:err
+                })
+            })
+
+    let modal = document.querySelector('.modal')
+    modal.style.display = 'none'
+
+    }
+
+</script>
+</html>

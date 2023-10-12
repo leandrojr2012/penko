@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/despesas.css">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('../partials/menuTopo.ejs'); %>
+
+    <div class="conteiner">
+
+        <form action="/despesas_fixas_adicionar_service" method="post">
+            <div>
+                <label>Despesa:
+                    <select name="despesa_fixa_nome" id="despesa_fixa_nome">
+                        <% for(let i in rows){ %>
+                        <option value="<%= rows[i].iddespesa_fixa %>"><%= rows[i].despesa_fixa_nome %></option>
+                        <% } %>
+                    </select>
+                </label><br><br>
+                <label>Valor:
+                    <input type="number" name="despesa_fixa_valor" placeholder="520">
+                </label><br><br>
+                <label>Data:
+                    <input type="date" name="despesa_fixa_data" placeholder="01-01-2023">
+                </label><br><br>
+                <label>Observações:</label>
+                            <textarea name="despesa_fixa_obs" cols="30" rows="10" placeholder="Ex: Digite aqui as observações necessarias!"></textarea><br><br>
+                <button type="submit">ADICIONAR</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/despesas.css">
+    <title>DESPESAS</title>
+</head>
+<body>
+    <%- include('../partials/menuTopo.ejs'); %>
+    
+    <div class="conteiner">
+        <div class="despesa_fixa">
+            <a href="/home/despesas/despesas_fixas">Despesas Fixas</a>
+            <p>Em DESPESAS FIXAS, você devera cadastrar despesas do tipo:</p>
+
+            <ul>
+                <li>
+                    cpfl
+                </li>
+                <li>
+                    dae
+                </li>
+                <li>
+                    aluguel
+                </li>
+            </ul>
+        </div>
+        <div class="despesas_variaveis">
+            <a href="/home/despesas/despesas_variaveis">Despesas Variaveis</a>
+        </div>
+        <div class="despesas_fiscais">
+            <a href="/home/despesas/despesas_fiscais">Despesas Fiscais</a>
+        </div>
+    </div>
+</body>
+</html>

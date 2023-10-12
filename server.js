@@ -12,6 +12,7 @@ app.use(session({
   saveUninitialized: false,
 }))
 
+app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(express.static(path.resolve(__dirname, 'public')))
 

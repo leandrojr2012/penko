@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/despesas.css">
+    <title>DESPESA VARIAVEL ADICIONAR</title>
+</head>
+<body>
+
+    <%- include('../partials/menuTopo.ejs'); %>
+
+    <div class="conteiner">
+
+        <form action="/despesas_variaveis_adicionar_service" method="post">
+
+            <label>Despesa:
+                <select name="nome_despesa_variavel" id="">
+                    <% for(let i in rows){ %>
+                    <option value="<%= rows[i].iddespesa_variavel_cad %>"> <%= rows[i].despesa_variavel_cad_nome %> </option>
+                    <% } %>
+                </select>
+            </label><br><br>
+
+            <label>Valor:
+                <input type="number" name="valor_despesa_variavel" placeholder="200">
+            </label><br><br>
+
+            <label>Data:
+                <input type="date" name="data_despesa_variavel" placeholder="01-01-2023">
+            </label><br><br>
+
+            <label>Observações:</label>
+                <textarea name="obs_despesa_variavel" cols="30" rows="10" placeholder="Ex: Digite aqui as observações necessarias!"></textarea><br><br>
+            
+            <button type="submit">ADICIONAR</button>
+
+        </form>
+
+    </div>
+
+
+</body>
+</html>

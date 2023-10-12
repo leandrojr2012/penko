@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <%- include('../partials/menuTopo.ejs'); %>
+
+    <div class="conteiner">
+        <form action="/despesas_fixas_cadastrar_service" method="post">
+            <label>Nome da DESPESA:
+                <input type="text" name="nome_despesa_fixa" placeholder="CPFL">
+            </label><br><br>
+            <label>Tipo:
+                <input type="text" name="tipo_despesa_fixa" placeholder="Fornecedora de energia, Empresa Eletrica">
+            </label><br><br>
+            <button type="submit">CADASTRAR</button>
+        </form>
+    </div>
+</body>
+</html>
