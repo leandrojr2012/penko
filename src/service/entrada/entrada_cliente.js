@@ -7,8 +7,6 @@ async function entrada_cliente(entrada_idcliente, entrada_idservico, entrada_val
                                entrada_desc_diametro, entrada_desc_comprimento, entrada_status_desc_idstatus_entrada,
                                entrada_status_desc_identrada){
 
-            const data = new Date()
-            const entrada_status_desc_data = data
             const ativo = 1
 
             try{
@@ -16,7 +14,8 @@ async function entrada_cliente(entrada_idcliente, entrada_idservico, entrada_val
                     await db.insert({
                         entrada_idcliente,
                         entrada_idservico,
-                        entrada_valor: Number(entrada_valor)
+                        entrada_valor: Number(entrada_valor),
+                        entrada_data: new Date()
                     }).into('entrada')
 
 
@@ -30,7 +29,7 @@ async function entrada_cliente(entrada_idcliente, entrada_idservico, entrada_val
 
                     await db.insert({
                         entrada_status_desc_idstatus_entrada,
-                        entrada_status_desc_data,
+                        entrada_status_desc_data: new Date(),
                         entrada_status_desc_identrada,
                         entrada_status_desc_ativo: ativo
                     }).into('entrada_status_descricao')

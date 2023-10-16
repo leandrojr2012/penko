@@ -18,21 +18,24 @@
 
         <div class="selecao">
             <div class="selecao_geral">
-                <p class="p_edicao">Período de: </p> 
+                <p class="p_edicao">Filtrar por: </p> 
             </div>
             <div class="selecao_geral">
-                <input class="input_color" id="input_data"  type="date"> 
+                <select class="input_color" name="cliente" id="">
+                    <option value="">Clientes</option>
+                    <% for(let i in rows_cliente){ %>
+                    <option value="<%= rows_cliente[i].idcliente%>"><%= rows_cliente[i].cliente_nome_fantasia %></option>
+                    <% } %>
+                </select>
             </div>
             <div class="selecao_geral">
-                <p class="p_edicao">a </p> 
+                <input class="input_color" name="data" id="input_data" type="date"> 
             </div>
             <div class="selecao_geral">
-                <input class="input_color"  id="input_data" type="date"> 
-            </div>
-            <div class="selecao_geral">
-                <select class="input_color" name="" id="">
+                <select class="input_color" name="status" id="">
+                    <option value="">Status</option>
                 <% for(let i in rows_status){ %>
-                    <option value=""><%= rows_status[i].status_entrada_status %></option>
+                    <option value="<%= rows_status[i].idstatus_entrada %>"><%= rows_status[i].status_entrada_status %></option>
                 <% } %>
                 </select>
             </div>
@@ -47,6 +50,7 @@
             </div>
         </div>
     </form>    
+
     
 
         <div class="tab">
@@ -58,6 +62,7 @@
                             <th>Serviço</th>
                             <th>Peça</th>
                             <th>Dimensões (mm)</th>
+                            <th>Data O.S.</th>
                             <th>Status</th>
                             <th class="table_tr_th">Editar Status</th>
                             <th class="table_tr_th">Visualizar</th>
@@ -79,8 +84,13 @@
                                 <td>
                                     <p style="display: flex; justify-content: center;"><%= rows[i].entrada_desc_diametro %> X <%= rows[i].entrada_desc_comprimento %></p>
                                 </td>
-                                <td class="table_td_status" id="td-<%= rows[i].identrada %>-statusx">
-                                    <p style="display: flex; justify-content: center;"><%= rows[i].status_entrada_status %></p>
+                                <td>
+                                    <p style="display: flex; justify-content: center;"><%= rows[i].entrada_data %></p>
+                                </td>
+                                <% const cores_status = {"2": "#ff0000", "4": "#00ff00", "3": "#0011ff"} %>
+                                <td class="table_td_status"  id="td-<%= rows[i].identrada %>-statusx" style = "background-color: <%= cores_status[rows[i].entrada_status_desc_idstatus_entrada] %>">
+                                    <p style="display: flex; justify-content: center; "><%= rows[i].status_entrada_status %></p>
+                                    
                                 </td>
                                 <td>
                                     <i class="fa-solid fa-pen-to-square" id="edite" value="<%= rows[i].identrada %>" style="display: flex; justify-content: center;" onclick="modal(<%= rows[i].identrada %>)"></i>
@@ -131,42 +141,6 @@
 
 </body>
 <script>
-
-    let lista = []
-
-    async function buscar(){
-
-        let data_search
-
-        let search = document.getElementById('input_search').value
-
-        await fetch(`http://localhost:8080/home/entradas_producao/${search}?`, {
-                 }).then(response =>{  
-                     return response.json()
-                   .then(data_sea =>{
-
-                    if(data_sea){
-                        data_search = data_sea
-                    }
-
-                   })
-                   }).catch((error_search)=>{console.log(error_search)})
-
-        console.log('teste: ' + data_search)
-
-        let tbody =  document.getElementById('tbody')
-        let tr =  tbody.insertRow()
-        let td_search =  tr.insertCell()
-
-        buscar.push({
-                        search_id: data_search
-                    })
-
-    }
-
-    function cor_status(){
-
-    }
     
     function modal(id){
         let modal = document.querySelector('.modal')
