@@ -36,7 +36,7 @@ exports.entrada_service = (req, res) =>{
                     entrada_desc_diametro, entrada_desc_comprimento, entrada_status_desc_idstatus_entrada,
                     entrada_status_desc_identrada)
     .then(()=>{
-        return res.redirect('/home') 
+        return res.redirect('/home/entrada') 
     }).catch((erros) => {console.log(erros)
         //error_msg = erros
         return res.redirect('/home/orcamento')

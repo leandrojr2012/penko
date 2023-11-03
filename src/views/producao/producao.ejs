@@ -10,9 +10,10 @@
     <title>Document</title>
 </head>
 <body>
+    <head>
+        <%- include('../partials/menuTopo.ejs'); %>
+    </head>
     <main>
-
-    <%- include('../partials/menuTopo.ejs'); %>
 
     <form action="http://localhost:8080/home/producao" method="get">
 
@@ -41,7 +42,7 @@
             </div>
             <div class="selecao_geral">
                 
-                <input type="search" name="input_search" id="input_search"  placeholder="Digite o numero da O.S. que procura!" >
+                <input type="search" name="input_search" id="input_search"  placeholder="Numero da O.S." >
             </div>
             <div class="selecao_geral">
                 <button type="submit" class="carregar_lista">
@@ -73,7 +74,7 @@
                                     <p id="ido_s" style="display: flex; justify-content: center;"><%= rows[i].identrada %></p>
                                 </td>
                                 <td> 
-                                    <p  style="display: flex; justify-content: center;"><%= rows[i].cliente_nome_fantasia %></p>
+                                    <p id="cliente_nome" value="<%= rows[i].cliente_nome_fantasia %>" style="display: flex; justify-content: center;"><%= rows[i].cliente_nome_fantasia %></p>
                                 </td>
                                 <td>
                                     <p style="display: flex; justify-content: center;"><%= rows[i].servico_tipo %></p>
@@ -85,7 +86,9 @@
                                     <p style="display: flex; justify-content: center;"><%= rows[i].entrada_desc_diametro %> X <%= rows[i].entrada_desc_comprimento %></p>
                                 </td>
                                 <td>
-                                    <p style="display: flex; justify-content: center;"><%= rows[i].entrada_data %></p>
+                                    <% let date = rows[i].entrada_data %>
+                                    <%= console.log('teste: ' + date) %>
+                                    <p style="display: flex; justify-content: center;"><%= date %></p>
                                 </td>
                                 <% const cores_status = {"2": "#ff0000", "4": "#00ff00", "3": "#0011ff"} %>
                                 <td class="table_td_status"  id="td-<%= rows[i].identrada %>-statusx" style = "background-color: <%= cores_status[rows[i].entrada_status_desc_idstatus_entrada] %>">
@@ -96,7 +99,7 @@
                                     <i class="fa-solid fa-pen-to-square" id="edite" value="<%= rows[i].identrada %>" style="display: flex; justify-content: center;" onclick="modal(<%= rows[i].identrada %>)"></i>
                                 </td>
                                 <td>
-                                    <i class="fa-solid fa-magnifying-glass" style="display: flex; justify-content: center;"></i>
+                                    <i class="fa-solid fa-magnifying-glass"  style="display: flex; justify-content: center;" onclick="visualizar_modal(<%= rows[i].identrada %>)"></i>
                                 </td>
                         </tr>
                         <% } %>
@@ -108,39 +111,217 @@
 
         <div class="inf">
             <div>
-                <p><<    <    | Pagina 1  de 1 |    >    >>  </p>
+                <form action="http://localhost:8080/home/producao" method="get">
+                    <div>
+                        <button name="pg_anterior"  value="<%= pagina -1 %>"> <<</button>
+                    </div>
+                </form>
+                <form action="http://localhost:8080/home/producao" method="get">
+                    <div class="conteiner_num_pagina">
+                        <p>Pagina </p>
+                        <input class="conteiner_num_pagina_input" type="text" name="pagina"  placeholder="<%= pagina %>">
+                        <p> de </p>
+                        <p><%= qnt_pg %></p>
+                    </div>
+                </form>
+                <form action="http://localhost:8080/home/producao" method="get">
+                    <button name="pg_posterior"  value="<%= pagina +1 %>">>></button>
+                </form>
             </div>
             <div class="inf_total">
-                <p> Você possui um total de:  <%= rows.length %> Peças na produção</p>
+                <p id="valor_rows" value="<%= rows.length %>"> Exibindo:  <%= rows.length %> dados de <%= count_front %></p>
             </div>
-     
         </div>
 
-        <div class="modal" id="modal"  style="width: 90vh; height: 30vh; background-color: aqua; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display:none;">
+        <div class="modal" id="modal"  style="width: 70vh; height: 30vh; background-color: rgb(255, 253, 253); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display:none;">
            
-            <p>valor os: </p> <p id="numero_os" value=""></p>
+            <div style="display: inline-flex; justify-content: space-between;font-family:Verdana, Geneva, Tahoma, sans-serif;">
+                <header style="padding-left: 1vh; padding-top: 0.5vh; width: 66vh; height: 4vh; color: white; background-color: black;">Atualizar Status</header>
+                <button class="fechar" style="border:none; width: 4vh; height: 4vh; background-color: rgb(0, 0, 0); color: white; float: inline-end; cursor: pointer;" onclick="fechar_modal()">X</button><br><br>
+            </div>
 
-            <div class="fechar" style="width: 9vh; height: 3vh; background-color: brown; float: inline-end; cursor: pointer;" onclick="fechar_modal()">Fechar X</div>
-            
-            <label>Status:</label>
-            <select name="status_modal" id="status_modal">
-                <% for(let i in rows_status){ %>
-                    <option  value="<%= rows_status[i].idstatus_entrada %>"><%= rows_status[i].status_entrada_status %></option>
-                <% } %>
-            </select>
+            <div style="display: flex;">
+                <p>O.S.: </p> 
+                <p id="numero_os" value="" style=""></p>
+            </div>
 
-            <div class="salvar" id="edit_status"  style="width: 9vh; height: 3vh; background-color: brown; float: inline-start; cursor: pointer;" onclick="salvar_modal()">
-            EDITAR
+            <div style="display: inline-flex; background-color: rgb(247, 247, 247); padding: 3vh; align-items: center; margin-left: 12vh; border-radius: 5px;">
+                <label style="margin-left: 3vh;">Status:</label>
+                <select name="status_modal" id="status_modal">
+                    <% for(let i in rows_status){ %>
+                        <option  value="<%= rows_status[i].idstatus_entrada %>"><%= rows_status[i].status_entrada_status %></option>
+                    <% } %>
+                </select>
+            </div><br><br>
+
+            <div style=" margin-left: 1.5vh; border-top: 1px solid silver; width: 66vh; height: 8vh;"><br>
+
+            <div style="display: flex; justify-content: end; ">
+                <button class="salvar" id="edit_status"  style="color: white; width: 12vh; height: 3vh; background-color: rgb(235, 86, 86); float: inline-start; cursor: pointer; font-family: Verdana, Geneva, Tahoma, sans-serif;" onclick="salvar_modal()"> EDITAR</button>
+            </div>
+  
+
             </div>
         </div>
-        <br><br><br>
+        <div class="modal_visu" id="modal_visu" style="width: 150vh; height: 65vh; background-color: rgb(196, 196, 196); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display:none;">
+            <div style="display: inline-flex; justify-content: space-between;font-family:Verdana, Geneva, Tahoma, sans-serif;">
+                <header style="padding-left: 1vh; padding-top: 0.5vh; width: 146vh; height: 4vh; color: white; background-color: black;">Visualizar O.S.</header>
+                <button class="fechar_visualizar_modal" style="border:none; width: 4vh; height: 4vh; background-color: rgb(0, 0, 0); color: white; float: inline-end; cursor: pointer;" onclick="fechar_visualizar_modal()">X</button><br><br>
+            </div>
+            <div style="display: flex;">
+                <p>O.S.: </p> 
+                <p id="numero_os_visualizar"></p>
+            </div>
 
-
+            <div id="tabela_impressao">
+                <table>
+                    <tr>
+                        <th>
+                            Cliente
+                        </th>
+                        <th>
+                            CNPJ
+                        </th>
+                        <th>
+                            Razão Social
+                        </th>
+                        <th>
+                            Contato
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p id="cliente_nome_fantasia"></p>
+                        </td>
+                        <td>
+                            <p id="cliente_cnpj"></p>
+                        </td>
+                        <td>
+                            <p id="cliente_rs"></p>
+                        </td>
+                        <td>
+                            <p id="cliente_contato"></p>
+                        </td>                   
+                    </tr>
+                </table>
     
+                <table>
+                    <tr>
+                        <th>
+                            Serviço
+                        </th>
+                        <th>
+                            Peça
+                        </th>
+                        <th>
+                            Dimensões
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; justify-content: center;">
+                                <p id="servico"></p>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: flex; justify-content: center;">
+                                <p id="peca"></p>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: flex; justify-content: center;">
+                                <p id="dimencao"></p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th>
+                            STATUS
+                        </th>
+                        <th>
+                            Data
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; justify-content: center;">
+                                <p id="status"></p>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: flex; justify-content: center;">
+                                <p id="data"></p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <div style="display: flex; justify-content: end; margin-right: 2vh; margin-bottom: 2vh;">
+                <button onclick="imprimir()">IMPRIMIR</button>
+            </div>
+        </div>
+
+
     </main>
+
+    <footer >
+    </footer>
 
 </body>
 <script>
+
+async function visualizar_modal(id){
+        let modal_visu = document.querySelector('.modal_visu')
+
+        modal_visu.style.display = 'block'
+
+        let data_sql
+
+        await fetch(`http://localhost:8080/home/producao/${id}?`, {
+                 }).then(response =>{  
+                     return response.json()
+                   .then(data =>{
+                    if(data){
+                        data_sql = data
+                    }
+                   })
+                   }).catch((error_servico)=>{console.log(error_servico)})
+
+
+        let display = document.getElementById('numero_os_visualizar')
+        let display_cliente_nome_fant = document.getElementById('cliente_nome_fantasia')
+        let display_cliente_cnpj = document.getElementById('cliente_cnpj')
+        let display_cliente_rs = document.getElementById('cliente_rs')
+        let display_cliente_cont = document.getElementById('cliente_contato')
+        let display_servico = document.getElementById('servico')
+        let display_peca = document.getElementById('peca')
+        let display_dimencao = document.getElementById('dimencao')
+        let display_data = document.getElementById('data')
+        let display_status = document.getElementById('status')
+        display.innerHTML = "<h3>" + id + "</h3>"
+        display_cliente_nome_fant.innerHTML = "<h3>" + data_sql.sql[0].cliente_nome_fantasia + "</h3>" 
+        display_cliente_cnpj.innerHTML = "<h3>" + data_sql.sql[0].cliente_cnpj + "</h3>" 
+        display_cliente_rs.innerHTML = "<h3>" + data_sql.sql[0].cliente_razao_social + "</h3>" 
+        display_cliente_cont.innerHTML = "<h3>" + data_sql.sql[0].cliente_cont_whats + "</h3>" 
+        display_servico.innerHTML = "<h3>" + data_sql.sql[0].servico_tipo + "</h3>"
+        display_peca.innerHTML = "<h3>" + data_sql.sql[0].cliente_desc_pc_descricao + "</h3>"
+        display_dimencao.innerHTML = "<h3>" + data_sql.sql[0].entrada_desc_comprimento + "X" + data_sql.sql[0].entrada_desc_diametro + "</h3>"
+        display_data.innerHTML = "<h3>" + data_sql.sql[0].entrada_data + "</h3>"
+        display_status.innerHTML = "<h3>" + data_sql.sql[0].status_entrada_status + "</h3>"
+        display.setAttribute("value", id)
+
+
+    }
+
+    function fechar_visualizar_modal(){
+
+        let modal_visu = document.querySelector('.modal_visu')
+
+        modal_visu.style.display = 'none'
+    }   
     
     function modal(id){
         let modal = document.querySelector('.modal')
@@ -176,7 +357,7 @@
 
                 response.json().then(dados => {
                     const tr = document.getElementById('tr-'+ido_s)
-                    tr.children[5].innerHTML = dados.descricao
+                    tr.children[6].innerHTML = dados.descricao
                 })
 
             })
@@ -189,10 +370,35 @@
                 })
             })
 
-    let modal = document.querySelector('.modal')
-    modal.style.display = 'none'
+        let modal = document.querySelector('.modal')
+        modal.style.display = 'none'
 
     }
+
+    function imprimir(){
+
+        const impr_tabela = document.getElementById('tabela_impressao').innerHTML
+
+        let estilo = "<style>"
+        estilo += "table{width: 100%; font: 25px Clibri}"
+        estilo += "table, th, td{border: solid 2px #888; border-collapse: collapse";
+        estilo += "padding: 4px 8px; text-align: center}"
+        estilo += "</style>"
+
+        const  win = window.open('','', 'heigth=700, width=700')
+
+        win.document.write('<html><head>')
+        win.document.write('<title>Teste</title>')
+        win.document.write(estilo)
+        win.document.write('</head>')
+        win.document.write('<body>')
+        win.document.write(impr_tabela)
+        win.document.write('</body></html>')
+
+        win.print()
+        win.close()
+    }
+
 
 </script>
 </html>

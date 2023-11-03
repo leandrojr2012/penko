@@ -42,6 +42,7 @@ exports.orcamento_service = (req, res) =>{
     const orcamento_desconto = dados.desconto
     const orcamento_valor_total = dados.totalinp
     const orcamento_descricao_id_orcamento = dados.numero_pedido
+    
 
     //console.log(JSON.stringify(req.body, null, 4))
 

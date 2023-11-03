@@ -50,6 +50,7 @@ route.get('/home/unidade/:unidade', eAdmin, dados_unidadecontroller.dados_unidad
 route.get('/home/cliente/:cliente', eAdmin, dados_clientecontroller.dados_cliente)
 route.get('/home/entrada/status/:status_entrada', eAdmin, dados_status_entradacontroller.dados_status_entrada)
 route.get('/home/entradas_producao/:search', eAdmin, dados_entrada_producao.dados_entrada_producao)
+route.get('/home/producao/:id', eAdmin, producaocontroller.producao_retorna_dados)
 
 //DESPESAS
 route.get('/home/despesas', eAdmin, despesascontroller.despesas)

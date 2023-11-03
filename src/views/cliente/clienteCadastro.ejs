@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/cliente.css">
+    <link rel="stylesheet" href="/css/cadastrar_cliente.css">
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css">
     <title>CADASTRO CLIENTE</title>
 </head>
 <body>
@@ -12,84 +13,132 @@
     <%- include('../partials/menuTopo.ejs'); %>
 
         <form action="/cadastro_cliente_service" method="post">
+            
+            <div class="titulo">
+                <label> 
+                    <p class="titulo_escrita"><i class="fa-solid fa-address-card fa-xl"></i> Cadastro de Cliente</p>
+                </label>
+            </div>
 
+            <div class="geral" id="geral">
 
-            <div class="conteiner">
-                <div class="titulo_form">
-                    <h2>Cadastro de Cliente</h2>
+                <div class="entrada_numero" id="entrada_numero">
+                    <label>
+                        <p> teste</p>
+                    </label>
                 </div>
-                <div class="dadospessoais">
-                        <div>
-                            <div class="titulo">
-                                <p>DADOS CADASTRAIS</p>
-                            </div>
-                            <label >ºNome Fantasia:</label>
-                            <input type="text" name="nome_fantasia" placeholder="Ex: Cromoduro Poliman"><br><br>
-                            <label for="">Razao Social:</label>
-                            <input type="text" name="razao_social" placeholder="Ex: Luiz Penko Felisbino - ME"><br><br>
-                            <label for="">CNPJ:</label>
-                            <input type="number" name="cnpj" placeholder="Ex: 12.345.678/0001-00"><br><br>
-                            <label for="">Inscrição Estadual:</label>
-                            <input type="number" name="i_e" placeholder="Ex: 123.456.789.000"><br><br>
+                <div class="conteiner" id="conteiner">
+
+                    <div class="parte_um">
+                        <div class="titulo_coluna">
+                            <p>DADOS CADASTRAIS</p>
                         </div>
-                </div>
-                <div class="dadosempresa">
-                    <div>
-                        <div class="titulo">
+                        <div class="selecionadores">
+                            <label >Nome Fantasia: <br>
+                                <input  type="text" name="nome_fantasia" placeholder="Ex: Cromoduro Poliman">
+                            </label>
+                        </div>
+                        <div class="selecionadores">
+                            <label for="">Razao Social: <br>
+                                <input type="text" name="razao_social" placeholder="Ex: Luiz Penko Felisbino - ME">
+                            </label>
+                        </div>
+                        <div class="selecionadores">
+                            <label for="">CNPJ: <br>
+                                <input type="number" name="cnpj" placeholder="Ex: 12.345.678/0001-00">
+                            </label>
+                        </div>
+                        <div class="selecionadores">
+                            <label for="">Inscrição Estadual: <br>
+                                <input type="number" name="i_e" placeholder="Ex: 123.456.789.000">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="parte_dois">
+                        <div class="titulo_coluna">
                             <p>DADOS EMPRESA</p>
                         </div>
-                        <label>Endereço:</label>
-                        <input type="text" name="endereço" placeholder="Ex: Av. Interdistrital  957"><br><br>
-                        <label>Cidade:</label>
-                        <input type="text" name="cidade" placeholder="Ex: Santa Barbara d` Oeste"><br><br>
-                        <label>Bairro:</label>
-                        <input type="text" name="bairro" placeholder="Ex: Distrito Industrial"><br><br>
-                        <label>CEP:</label><br>
-                        <input type="number" name="cep" placeholder="Ex: 13.450-000"><br><br>
-                        <label for="">UF</label>
-                        <select name="uf">
-                            <option value="sp">SP</option>
-                            <option value="rj">RJ</option>
-                            <option value="mg">MG</option>
-                            <option value="rs">RS</option>
-                        </select><br><br>
-                        <label>Contato Celular:</label>
-                        <input type="number" name="cont_cel" placeholder="Ex: 19 99912 3456"><br><br>
-                        <label>Contato WHATSAPP:</label>
-                        <input type="number" name="cont_whats" placeholder="Ex: 19 99912 3456"><br><br>
-                        <label>Contato Fixo:</label>
-                        <input type="number" name="cont_fixo" placeholder="Ex: 19 3454 1234"><br><br>
-                        <label>EMAIL:</label>
-                        <input type="text" name="email" placeholder="Ex: Penko@penko.com.br"><br><br>
+                        <div>
+                            <label>Endereço: <br>
+                                <input type="text" name="endereço" placeholder="Ex: Av. Interdistrital  957">
+                            </label>
+                        </div>
+                        <div>
+                            <label>Cidade: <br>
+                                <input type="text" name="cidade" placeholder="Ex: Santa Barbara d` Oeste">
+                            </label>
+                        </div>
+                        <div>
+                            <label>Bairro: <br>
+                                <input type="text" name="bairro" placeholder="Ex: Distrito Industrial">
+                            </label>
+                        </div>
+                        <div>
+                            <label>CEP: <br>
+                                <input type="number" name="cep" placeholder="Ex: 13.450-000">
+                            </label>
+                        </div>
+                        <div>
+                            <label for="">UF: <br>
+                                <select name="uf">
+                                    <option value="sp">SP</option>
+                                    <option value="rj">RJ</option>
+                                    <option value="mg">MG</option>
+                                    <option value="rs">RS</option>
+                                </select>
+                            </label>
+                        </div>
                     </div>
-                </div>
-
-                <div class="dadosfinais">
-                    <div>
-                        <div class="titulo">
+                    <div class="parte_tres">
+                        <div class="titulo_coluna">
                             <p>DADOS CONTATO</p>
                         </div>
-                        <div class="inputform">
-                            <label>Nome Responsavel:</label>
-                            <input type="text" name="nome_resp" placeholder="Ex: Fabio"><br><br>
-                            <label >Cargo:</label>
-                            <input type="text" name="cargo" placeholder="Ex: Administrador"><br><br>
-                            <label>Observações:</label>
-                            <textarea name="obs" cols="30" rows="10" placeholder="Ex: Digite aqui as observações necessarias!"></textarea>
+                        <div>
+                            <label>Nome Responsavel: <br>
+                                <input type="text" name="nome_resp" placeholder="Ex: Fabio">
+                            </label>
+                        </div>
+                        <div>
+                            <label >Cargo: <br>
+                                <input type="text" name="cargo" placeholder="Ex: Administrador">
+                            </label> 
+                        </div>
+                        <div>
+                            <label>Contato Celular: <br>
+                                <input type="number" name="cont_cel" placeholder="Ex: 19 99912 3456">
+                            </label>
+                        </div>
+                        <div>
+                            <label>Contato WHATSAPP: <br>
+                                <input type="number" name="cont_whats" placeholder="Ex: 19 99912 3456">
+                            </label>
+                        </div>
+                        <div>
+                            <label>Contato Fixo: <br>
+                                <input type="number" name="cont_fixo" placeholder="Ex: 19 3454 1234">
+                            </label>
+                        </div>
+                        <div>
+                            <label>EMAIL: <br>
+                                <input type="text" name="email" placeholder="Ex: Penko@penko.com.br">
+                            </label>
                         </div>
                     </div>
+
                 </div>
 
-
-                    
-                    <div class="botao">
-                        <button class="Bcadastrar">CADASTRAR</button>
-                    </div>
-
             </div>
-            <div>
-
+            
+            <div class="text_area">
+                <label> Observações: 
+                    <textarea name="obs" cols="30" rows="10" placeholder="Ex: Digite aqui as observações necessarias!"></textarea>
+                </label>
             </div>
+
+            <div class="botao">
+                <button class="Bcadastrar">CADASTRAR</button>
+            </div>
+            
         </form>
 </body>
 </html>

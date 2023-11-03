@@ -146,6 +146,15 @@
         color: white;
     }
 
+    .conteiner_num_pagina{
+        display: flex;
+        align-items: center;
+    }
+
+    .conteiner_num_pagina_input{
+        width: 2rem;
+        border: 1px solid rgb(219, 219, 219);
+    }
 
 
 

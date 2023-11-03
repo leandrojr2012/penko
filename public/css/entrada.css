@@ -4,3 +4,165 @@
     box-sizing: border-box;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
+    
+    body{
+    background-color: white;
+    }
+
+    .geral{
+        margin-left: 1%;
+    }
+
+    .conteiner{
+        width: 99%;
+        background-color: #f8f8f8;
+        display: flex;
+    }
+
+    .titulo{
+        background-color: rgb(69, 69, 163);
+        width: 100%;
+        padding: 2vh;
+        margin-bottom: 5vh;
+    }
+
+
+    .entrada_numero{
+        display: flex;
+        justify-content: center;
+        background-color: rgb(129, 129, 129);
+        padding: 1vh;
+        width: 99%;
+    }
+
+    .botoes{
+        display: flex;
+        justify-content: end;
+        width: 99%;
+        background-color: #f8f8f8;
+    }
+
+    .botoes_diversos{
+        margin-right: 4vh;
+        background-color: white;
+        border: 1px solid #ebebeb;
+    }
+
+    .botao{
+        display: flex;
+        justify-content: center;
+        padding: 2vh;
+        width: 99%;
+        background-color: #f8f8f8;
+        margin-bottom: 5vh;
+    }
+
+    button{
+        color: #4b4b4b;
+        background-color: rgb(206, 206, 206);
+        padding: 1vh;
+        border-radius: 2px;
+        cursor: pointer;
+        border: none;
+        width: 20vh;
+        font-weight: bold;
+    }
+
+    .botao :hover {
+        background-color: rgb(99, 99, 99);
+        transition: 1s;
+        color: rgb(255, 255, 255);
+        font-weight: bolder;
+    }
+
+    #entrada_dimensoes{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    #dimensoes{
+        width: 100%;
+        padding-right: 2vh;
+    }
+
+    .dimensoes_input{
+        width: 100%;
+    }
+
+    p{
+        font-size: 3vh;
+        color: white;
+    }
+
+    label{
+        font-size: 1.9vh;
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+    }
+
+    option{
+        font-weight: bold;
+        outline: none;
+    }
+
+    select{
+        border: 1px solid #f0f0f0;
+        background-color: rgb(255, 255, 255);
+        border-radius: 3px;
+        outline: none;
+        width: 98%;
+        height: 5vh;
+        padding: 1vh;
+        margin-top: 0.7vh;
+        color: rgb(139, 139, 139);
+    }
+
+    input{
+        background-color: rgb(235, 235, 235);
+        border: none;
+        border-bottom: 2px solid silver;
+        border-radius: 0.5vh;
+        padding: 1vh;
+        font-size: large;
+        outline: none;
+        margin-top: 1%;
+        width: 98%;
+    }
+
+    .selecionadores{
+        padding-left: 3vh;
+        padding-bottom: 1vh;
+        padding-top: 1vh;
+    }
+
+    .titulo_escrita{
+        margin-left: 6vh;
+    }
+
+    ::-webkit-input-placeholder{
+        color: rgb(185, 185, 185);
+    }
+
+    textarea{
+        background-color: rgb(235, 235, 235);
+        border: none;
+        border-bottom: 2px solid silver;
+        border-radius: 0.5vh;
+        padding: 1vh;
+        margin-top: 1vh;
+        outline: none;
+        width: 96%;
+        height: 59vh;
+    }
+
+    .parte_um{
+        width: 50%;
+    }
+
+    .parte_dois{
+        width: 50%;
+    }
+
+
+

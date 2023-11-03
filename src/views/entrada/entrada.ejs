@@ -4,70 +4,98 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css">
     <link rel="stylesheet" href="/css/entrada.css">
     <title>ENTRADA</title>
 </head>
 <body>
     <%- include('../partials/menuTopo.ejs'); %>
     
-    <div class="conteiner">
-
-
 
         <form action="/entrada_service" method="post">
-
-            <label>Entrada Nº:
-                <input type="text" name="numero_entrada" value=" <%= rows_numero_entrada[0][0].numero + 1 %> ">  
-            </label>
-                <br><br>
-
-            <label>Cliente:
-                <select name="cliente" id="cliente">
-                    <% for(let i in rows_cliente){ %>
-                    <option value="<%= rows_cliente[i].idcliente %>"><%= rows_cliente[i].cliente_nome_fantasia %></option>
-                    <% } %>
-                </select>
-            </label><br><br>
-
-            <label>Serviço:
-                <select name="servico" id="servico">
-                    <% for(let i in rows_servico){ %>
-                    <option value="<%= rows_servico[i].idservico %>"><%= rows_servico[i].servico_tipo %></option>
-                    <% } %>
-                </select>
-            </label><br><br>
             
-            <label>Descrição:
-                <select name="descricao" id="descricao">
-                    <% for(let i in rows_descricao){ %>
-                        <option value="<%= rows_descricao[i].idcliente_desc_peca %>"><%= rows_descricao[i].cliente_desc_pc_descricao %></option>
-                    <% } %>
-                    </select>
-            </label><br><br>
+            <div class="titulo">
+                <label>
+                    <p class="titulo_escrita"><i class="fa-solid fa-address-card fa-xl"></i> Cadastro Produto</p>
+                </label>
+            </div>
+            <div class="geral" id="geral">
+                <div class="entrada_numero" id="entrada_numero">
+                    <label>
+                        <p value="<%= rows_numero_entrada[0][0].numero + 1 %>" name="numero_entrada">Entrada Nº <%= rows_numero_entrada[0][0].numero + 1 %></p>
+                    </label>
+                </div>
+                <div class="conteiner" id="conteiner">
+                    <div class="parte_um">
+                        <div class="selecionadores">
+                            <label>Cliente:<br>
+                                <select name="cliente" id="cliente">
+                                    <option value="">selecione o cliente desejado</option>
+                                    <% for(let i in rows_cliente){ %>
+                                    <option value="<%= rows_cliente[i].idcliente %>"><%= rows_cliente[i].cliente_nome_fantasia %></option>
+                                    <% } %>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="selecionadores">
+                            <label>Serviço: <br>
+                                <select name="servico" id="servico">
+                                    <% for(let i in rows_servico){ %>
+                                    <option value="<%= rows_servico[i].idservico %>"><%= rows_servico[i].servico_tipo %></option>
+                                    <% } %>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="selecionadores">
+                            <label>Descrição: <br>
+                                <select name="descricao" id="descricao">
+                                    <% for(let i in rows_descricao){ %>
+                                        <option value="<%= rows_descricao[i].idcliente_desc_peca %>"><%= rows_descricao[i].cliente_desc_pc_descricao %></option>
+                                    <% } %>
+                                    </select>
+                            </label>
+                        </div>
+                        <div class="selecionadores" id="entrada_dimensoes">
+                            <label id="dimensoes">Diametro(mm):<br>
+                                <input type="number" class="dimensoes_input" name="entrada_diametro" id="entrada_diametro" placeholder="260">
+                            </label>
+                            <label id="dimensoes">Comprimento(mm):<br>
+                                <input type="number" class="dimensoes_input" name="entrada_comprimento" id="entrada_comprimento" placeholder="2000">
+                            </label>
+                        </div>
+                        <div class="selecionadores">
+                            <label>Valor:<br>
+                                <input type="number" name="entrada_valor" id="entrada_valor" placeholder="2000">
+                            </label>
+                        </div>
+                        <div class="selecionadores">
+                            <label>Status:<br>
+                                <select name="status_entrada" id="status_entrada">
+                                    <% for(let i in rows_status){ %>
+                                    <option value="<%= rows_status[i].idstatus_entrada %>"><%= rows_status[i].status_entrada_status %></option>
+                                    <% } %>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="parte_dois">
+                        <div class="selecionadores">
+                            <label>Observaçoes:
+                                <textarea name="" id="" cols="30" rows="10" placeholder="Observações a serem lembradas!"></textarea>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button class="botoes_diversos" onclick="imprimir()"><i class="fa-solid fa-print fa-xl"></i> Impressão</button>
+                    <button class="botoes_diversos"><i class="fa-solid fa-paperclip fa-xl"></i> Anexo</button>
+                    <button type="button" class="botoes_diversos" onclick="limpar()"><i class="fa-solid fa-eraser fa-xl"></i> Limpar</button>
+                </div>
+                <div class="botao">
+                    <button type="submit"><i class="fa-regular fa-floppy-disk fa-xl"></i> Salvar</button>
+                </div>
 
-            <label>Diametro(mm):
-                <input type="number" name="entrada_diametro" id="entrada_diametro" placeholder="260">
-            </label>
-
-            <label>Comprimento(mm):
-                <input type="number" name="entrada_comprimento" id="entrada_comprimento" placeholder="2000">
-            </label><br><br>
-
-             <label>Status:
-                <select name="status_entrada" id="status_entrada">
-                    <% for(let i in rows_status){ %>
-                    <option value="<%= rows_status[i].idstatus_entrada %>"><%= rows_status[i].status_entrada_status %></option>
-                    <% } %>
-                </select>
-            </label> <br><br>
-
-            <label>Valor: 
-                <input type="number" name="entrada_valor" id="entrada_valor" placeholder="2000">
-            </label><br><br>
-
-            <button type="submit">OK</button>
-
-
+            </div>    
         </form>
 
     </div>
@@ -76,8 +104,38 @@
 
 <script>
 
+function imprimir(){
+    
+    const impr_tabela = document.getElementById('conteiner').innerHTML
+    const impr_entrada_numero = document.getElementById('entrada_numero').innerHTML
 
+    let estilo = "<style>"
+    estilo += "table{width: 100%; font: 25px Clibri}"
+    estilo += "table, th, td{border: solid 2px #888; border-collapse: collapse";
+    estilo += "padding: 4px 8px; text-align: center}"
+    estilo += "</style>"
 
+    const  win = window.open('','', 'heigth=700, width=700')
+
+    win.document.write('<html><head>')
+    win.document.write('<title>Teste</title>')
+    win.document.write(estilo)
+    win.document.write('</head>')
+    win.document.write('<body>')
+    win.document.write(impr_entrada_numero)
+    win.document.write(impr_tabela)
+    win.document.write('</body></html>')
+
+    win.print()
+    win.close()
+}
+
+function limpar(){
+
+    let cliente = document.getElementById('cliente')
+
+    cliente = ''
+}
 </script>
 
 </html>
