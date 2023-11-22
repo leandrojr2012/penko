@@ -22,7 +22,7 @@
             <div class="geral" id="geral">
                 <div class="entrada_numero" id="entrada_numero">
                     <label>
-                        <p value="<%= rows_numero_entrada[0][0].numero + 1 %>" name="numero_entrada">Entrada Nº <%= rows_numero_entrada[0][0].numero + 1 %></p>
+                        <input type="hidden" value="<%= rows_numero_entrada[0][0].numero + 1 %>" id="numero_entrada" name="numero_entrada">Entrada Nº <%= rows_numero_entrada[0][0].numero + 1 %>
                     </label>
                 </div>
                 <div class="conteiner" id="conteiner">
@@ -69,10 +69,10 @@
                             </label>
                         </div>
                         <div class="selecionadores">
-                            <label>Status:<br>
-                                <select name="status_entrada" id="status_entrada">
-                                    <% for(let i in rows_status){ %>
-                                    <option value="<%= rows_status[i].idstatus_entrada %>"><%= rows_status[i].status_entrada_status %></option>
+                            <label>Forma de pagamento: <br>
+                                <select name="pagamento" id="pagamento">
+                                    <% for(let i in rows_pagamento){ %>
+                                    <option value="<%= rows_pagamento[i].forma_pagamento_valor %>"><%= rows_pagamento[i].forma_pagamento_tipo %></option>
                                     <% } %>
                                 </select>
                             </label>
@@ -80,8 +80,15 @@
                     </div>
                     <div class="parte_dois">
                         <div class="selecionadores">
+                            <label>Status:<br>
+                                <select name="status_entrada" id="status_entrada">
+                                    <% for(let i in rows_status){ %>
+                                    <option value="<%= rows_status[i].idstatus_entrada %>"><%= rows_status[i].status_entrada_status %></option>
+                                    <% } %>
+                                </select>
+                            </label>
                             <label>Observaçoes:
-                                <textarea name="" id="" cols="30" rows="10" placeholder="Observações a serem lembradas!"></textarea>
+                                <textarea name="observacao" id="observacao" cols="30" rows="10" placeholder="Observações a serem lembradas!"></textarea>
                             </label>
                         </div>
                     </div>
@@ -132,9 +139,10 @@ function imprimir(){
 
 function limpar(){
 
-    let cliente = document.getElementById('cliente')
+    let teste = document.getElementById('numero_entrada').value
 
-    cliente = ''
+    console.log("teste identrada: " + teste)
+
 }
 </script>
 

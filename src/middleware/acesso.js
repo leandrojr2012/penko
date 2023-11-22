@@ -1,7 +1,7 @@
 const Jwt = require('jsonwebtoken')
 const db = require('../db/dataBase')
 
-async function  eFunc(req, res, next){
+async function  eLivre(req, res, next){
     try {
         let decoded = Jwt.verify(req.session.token, 'leandro');
 
@@ -14,4 +14,5 @@ async function  eFunc(req, res, next){
     }
 }
     
-module.exports = eFunc
+module.exports = eLivre
+

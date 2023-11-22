@@ -5,7 +5,7 @@ const db = require('../../db/dataBase')
 async function entrada_cliente(entrada_idcliente, entrada_idservico, entrada_valor, 
                                entrada_desc_identrada, entrada_desc_idcliente_desc_peca,
                                entrada_desc_diametro, entrada_desc_comprimento, entrada_status_desc_idstatus_entrada,
-                               entrada_status_desc_identrada){
+                               entrada_status_desc_identrada, entrada_forma_pagamento, entrada_desc_observacao){
 
             const ativo = 1
 
@@ -15,7 +15,8 @@ async function entrada_cliente(entrada_idcliente, entrada_idservico, entrada_val
                         entrada_idcliente,
                         entrada_idservico,
                         entrada_valor: Number(entrada_valor),
-                        entrada_data: new Date()
+                        entrada_data: new Date(),
+                        entrada_forma_pagamento
                     }).into('entrada')
 
 
@@ -23,7 +24,8 @@ async function entrada_cliente(entrada_idcliente, entrada_idservico, entrada_val
                         entrada_desc_identrada,
                         entrada_desc_idcliente_desc_peca,
                         entrada_desc_diametro: Number(entrada_desc_diametro), 
-                        entrada_desc_comprimento: Number(entrada_desc_comprimento)
+                        entrada_desc_comprimento: Number(entrada_desc_comprimento),
+                        entrada_desc_observacao
                     }).into('entrada_descricao')
 
 

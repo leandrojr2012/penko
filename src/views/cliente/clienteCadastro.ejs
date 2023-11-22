@@ -22,11 +22,6 @@
 
             <div class="geral" id="geral">
 
-                <div class="entrada_numero" id="entrada_numero">
-                    <label>
-                        <p> teste</p>
-                    </label>
-                </div>
                 <div class="conteiner" id="conteiner">
 
                     <div class="parte_um">
@@ -58,27 +53,27 @@
                         <div class="titulo_coluna">
                             <p>DADOS EMPRESA</p>
                         </div>
-                        <div>
+                        <div class="selecionadores">
                             <label>Endereço: <br>
                                 <input type="text" name="endereço" placeholder="Ex: Av. Interdistrital  957">
                             </label>
                         </div>
-                        <div>
+                        <div class="selecionadores">
                             <label>Cidade: <br>
                                 <input type="text" name="cidade" placeholder="Ex: Santa Barbara d` Oeste">
                             </label>
                         </div>
-                        <div>
+                        <div class="selecionadores">
                             <label>Bairro: <br>
                                 <input type="text" name="bairro" placeholder="Ex: Distrito Industrial">
                             </label>
                         </div>
-                        <div>
+                        <div class="selecionadores">
                             <label>CEP: <br>
                                 <input type="number" name="cep" placeholder="Ex: 13.450-000">
                             </label>
                         </div>
-                        <div>
+                        <div class="selecionadores">
                             <label for="">UF: <br>
                                 <select name="uf">
                                     <option value="sp">SP</option>
@@ -93,33 +88,33 @@
                         <div class="titulo_coluna">
                             <p>DADOS CONTATO</p>
                         </div>
-                        <div>
+                        <div class="selecionadores">
                             <label>Nome Responsavel: <br>
                                 <input type="text" name="nome_resp" placeholder="Ex: Fabio">
                             </label>
                         </div>
-                        <div>
+                        <div class="selecionadores">
                             <label >Cargo: <br>
                                 <input type="text" name="cargo" placeholder="Ex: Administrador">
                             </label> 
                         </div>
-                        <div>
+                        <div class="selecionadores">
                             <label>Contato Celular: <br>
                                 <input type="number" name="cont_cel" placeholder="Ex: 19 99912 3456">
                             </label>
                         </div>
-                        <div>
+                        <div class="selecionadores">
                             <label>Contato WHATSAPP: <br>
                                 <input type="number" name="cont_whats" placeholder="Ex: 19 99912 3456">
                             </label>
                         </div>
-                        <div>
+                        <div class="selecionadores">
                             <label>Contato Fixo: <br>
                                 <input type="number" name="cont_fixo" placeholder="Ex: 19 3454 1234">
                             </label>
                         </div>
-                        <div>
-                            <label>EMAIL: <br>
+                        <div class="selecionadores">
+                            <label>Email: <br>
                                 <input type="text" name="email" placeholder="Ex: Penko@penko.com.br">
                             </label>
                         </div>
@@ -134,9 +129,12 @@
                     <textarea name="obs" cols="30" rows="10" placeholder="Ex: Digite aqui as observações necessarias!"></textarea>
                 </label>
             </div>
-
+            <div class="botoes">
+                <button class="botoes_diversos" onclick="imprimir()"><i class="fa-solid fa-print fa-xl"></i> Impressão</button>
+                <button type="button" class="botoes_diversos" onclick="limpar()"><i class="fa-solid fa-eraser fa-xl"></i> Limpar</button>
+            </div>
             <div class="botao">
-                <button class="Bcadastrar">CADASTRAR</button>
+                <button class="cadastrar">CADASTRAR</button>
             </div>
             
         </form>

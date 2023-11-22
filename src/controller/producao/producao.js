@@ -1,4 +1,5 @@
 const db = require('../../db/dataBase')
+const eAdmin = require('../../middleware/acessoAdm')
 
 exports.producao = async (req, res) => {
 
@@ -26,7 +27,7 @@ exports.producao = async (req, res) => {
                                  'entrada_desc_idcliente_desc_peca', 'entrada_desc_diametro',
                                  'entrada_desc_comprimento', 'entrada_status_desc_idstatus_entrada',
                                  'cliente_nome_fantasia', 'servico_tipo', 'cliente_desc_pc_descricao',
-                                 'status_entrada_status', 'identrada_status_descricao')
+                                 'status_entrada_status', 'identrada_status_descricao') 
                                 .from('entrada')
                                 .join('cliente', {'entrada_idcliente': 'idcliente'})
                                 .join('servico', {'entrada_idservico': 'idservico'})
@@ -37,6 +38,10 @@ exports.producao = async (req, res) => {
                                 .where({entrada_status_desc_ativo:1})
                                 .offset((pagina * limite) - limite)
                                 .limit(limite)
+                                .orderBy('identrada')
+
+    //let usuario = db.select('funcionarioCondicao').from('funcionario')  UTILIZAR O LOGIN DO USUARIO PARA MONTAR O IF NO FRONTj
+
 
 
     const rows_status = await db.select('status_entrada_status', 'idstatus_entrada')
@@ -78,7 +83,6 @@ exports.producao = async (req, res) => {
     const rows = await sql 
            
 
-
     res.render('producao/producao.ejs', {rows, rows_status, rows_cliente, pagina, qnt_pg, count_front})
 }
 
@@ -91,7 +95,8 @@ exports.producao_retorna_dados = async (req, res) =>{
                             'entrada_desc_comprimento', 'entrada_status_desc_idstatus_entrada',
                             'cliente_nome_fantasia', 'cliente_cnpj', 'cliente_razao_social',
                             'cliente_cont_whats', 'servico_tipo', 'cliente_desc_pc_descricao',
-                            'status_entrada_status', 'identrada_status_descricao')
+                            'status_entrada_status', 'identrada_status_descricao', 'entrada_valor',
+                            'entrada_forma_pagamento', 'entrada_desc_observacao')
                         .from('entrada')
                         .join('cliente', {'entrada_idcliente': 'idcliente'})
                         .join('servico', {'entrada_idservico': 'idservico'})

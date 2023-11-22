@@ -20,7 +20,8 @@ const dados_entrada_producao = require('./src/controller/dados_entrada_producao/
 
 //MIDDLEWARE/SESSION
 const eAdmin = require('./src/middleware/acessoAdm')
-const eFunc = require('./src/middleware/acesso');
+const eFunc = require('./src/middleware/acessoFun');
+const eLivre = require('./src/middleware/acesso')
 
 // ********************ROTAS GET*********************
 
@@ -28,10 +29,10 @@ const eFunc = require('./src/middleware/acesso');
 route.get('/', acessocontroller. acesso) 
 
 //HOME
-route.get('/home', eFunc, homecontroller.home)
+route.get('/home', eLivre, homecontroller.home)
 
 //REGISTRO
-route.get('/home/registro', registroUsercontroller.registroUsuario)
+route.get('/home/registro', eAdmin, registroUsercontroller.registroUsuario)
 
 // CLIENTE
 route.get('/home/cliente', eAdmin, clientecontroller.cliente )
@@ -68,11 +69,10 @@ route.get('/home/despesas/despesas_fiscais/adicionar_despesa_fiscal', eAdmin, de
 route.get('/home/despesas/despesas_fiscais/visualizar_despesa_fiscal', eAdmin, despesascontroller.despesas_fiscais_visualizar)
 
 //ENTRADA
-route.get('/home/entrada', eFunc, eAdmin, entradacontroller.entrada)
+route.get('/home/entrada', eLivre, entradacontroller.entrada)
 
 //PRODUÇÃO
-route.get('/home/producao', eAdmin, eFunc, producaocontroller.producao)
-
+route.get('/home/producao', eLivre, producaocontroller.producao)
 
 // ******************ROTAS POST*********************
 
