@@ -39,7 +39,7 @@ async function busca_data(){
                         tls: {
                             rejectUnauthorized: false
                         }
-                    })
+                    }).
 
                     config.sendMail({
                         from:'Leandro_Email <leandro.daniel.jr@gmail.com>',
