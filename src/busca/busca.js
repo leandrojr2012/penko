@@ -10,25 +10,41 @@ async function busca_data(){
 
     let data_final = data_ano + '-' + data_mes + '-' + data_dia
     
-    let data_teste = '2023-12-21'
 
-    const data = await db.select('entrada_not_cob_data_recebimento', 'entrada_not_cob_identrada')
-                         .from('entrada_notificacao_cobranca')
 
-        for(let i in data){
-            if(data){
+        let bd_data = []
+
+        let data_teste = '2024-1-10'
+
+            const data = await db.select('entrada_not_cob_data_recebimento', 'entrada_not_cob_identrada')
+                                 .from('entrada_notificacao_cobranca')
+
+            for(let i in data){
+              if(data){
                 let nova_data = data[i].entrada_not_cob_data_recebimento
                 let nova_dia = nova_data.getDate().toString()
                 let nova_mes = (nova_data.getMonth()+1).toString()
                 let nova_ano = nova_data.getFullYear().toString()
                 let data_banco = nova_ano+'-'+nova_mes+'-'+nova_dia
 
-                console.log('data: ' + data_banco + ' id: ' + data[i].entrada_not_cob_identrada)
+                //console.log('data: ' + data_banco + ' id: ' + data[i].entrada_not_cob_identrada)
 
-                //if(data_teste === data_banco && data[i].entrada_not_cob_email_enviado == 0){
-                    if(data_teste == '2024-01-10'){
+            if(data_teste == data_banco){
 
-                    let config = nodemailer.createTransport({
+                bd_data.push({data_banco:data_banco, id:data[i].entrada_not_cob_identrada})
+
+
+                   console.log(bd_data)
+            }
+        }}
+        
+        for(let i in bd_data){
+            if(bd_data){
+
+            }
+        }
+
+                  /*  let config = nodemailer.createTransport({
                         host: 'smtp.gmail.com',
                         port: 465,
                         secure: true,
@@ -39,7 +55,7 @@ async function busca_data(){
                         tls: {
                             rejectUnauthorized: false
                         }
-                    }).
+                    })
 
                     config.sendMail({
                         from:'Leandro_Email <leandro.daniel.jr@gmail.com>',
@@ -50,7 +66,7 @@ async function busca_data(){
                     })
                     .then(async()=>{
                                 await db('entrada_notificacao_cobranca')
-                                .where({entrada_not_cob_identrada: entrada_not_cob_identrada})
+                                .where({entrada_not_cob_identrada: data[i].entrada_not_cob_identrada})
                                 .update({entrada_not_cob_email_enviado:1})
                     })
                     .catch((err)=> console.log(err))
@@ -59,12 +75,9 @@ async function busca_data(){
                     .where({entrada_not_cob_data_recebimento : data_teste})
                     .where({entrada_not_cob_email_enviado:0})
                     .update({entrada_not_cob_email_enviado:1})*/
-                }
-                
-            }
-        }
-
 }
+     
+
 
 busca_data()
 
