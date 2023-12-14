@@ -33,18 +33,12 @@ async function busca_data(){
 
                 bd_data.push({data_banco:data_banco, id:data[i].entrada_not_cob_identrada})
 
-
-                   console.log(bd_data)
             }
         }}
         
         for(let i in bd_data){
-            if(bd_data){
 
-            }
-        }
-
-                  /*  let config = nodemailer.createTransport({
+                    let config = nodemailer.createTransport({
                         host: 'smtp.gmail.com',
                         port: 465,
                         secure: true,
@@ -60,13 +54,13 @@ async function busca_data(){
                     config.sendMail({
                         from:'Leandro_Email <leandro.daniel.jr@gmail.com>',
                         to:'leandro.daniel.jr@gmail.com',
-                        subject:'teste envio email (id: ' + data[i].entrada_not_cob_identrada + ' )',
-                        html: '<h1>Ola, teste</h1> id:  ' + data[i].entrada_not_cob_identrada  + ' teste email',
-                        text: 'id: ' + data[i].entrada_not_cob_identrada + " teste email *esse;"
+                        subject:'teste envio email (id: ' + bd_data[i].id + ' )',
+                        html: '<h1>Ola, teste</h1> id:  ' + bd_data[i].id  + ' teste email',
+                        text: 'id: ' + bd_data[i].id + " teste email *esse;"
                     })
                     .then(async()=>{
                                 await db('entrada_notificacao_cobranca')
-                                .where({entrada_not_cob_identrada: data[i].entrada_not_cob_identrada})
+                                .where({entrada_not_cob_identrada: bd_data[i].id})
                                 .update({entrada_not_cob_email_enviado:1})
                     })
                     .catch((err)=> console.log(err))
@@ -75,6 +69,8 @@ async function busca_data(){
                     .where({entrada_not_cob_data_recebimento : data_teste})
                     .where({entrada_not_cob_email_enviado:0})
                     .update({entrada_not_cob_email_enviado:1})*/
+        }
+
 }
      
 
