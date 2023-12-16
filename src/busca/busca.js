@@ -14,10 +14,15 @@ async function busca_data(){
 
         let bd_data = []
 
-        let data_teste = '2024-1-10'
+        let data_teste = '2024-1-13'
 
-            const data = await db.select('entrada_not_cob_data_recebimento', 'entrada_not_cob_identrada')
+            const data = await db.select('entrada_not_cob_data_recebimento', 'entrada_not_cob_identrada', 
+                                         'cliente_nome_fantasia', 'identrada')
                                  .from('entrada_notificacao_cobranca')
+                                 .join('entrada', {'entrada_not_cob_identrada': 'identrada'})
+                                 .join('cliente', {'entrada_idcliente': 'idcliente'})
+
+                                 
 
             for(let i in data){
               if(data){
@@ -31,7 +36,11 @@ async function busca_data(){
 
             if(data_teste == data_banco){
 
-                bd_data.push({data_banco:data_banco, id:data[i].entrada_not_cob_identrada})
+                bd_data.push({data_banco:data_banco, 
+                              id:data[i].entrada_not_cob_identrada,
+                              O_S: data[i].identrada,
+                              nome_cliente: data[i].cliente_nome_fantasia
+                            })
 
             }
         }}
@@ -53,9 +62,9 @@ async function busca_data(){
 
                     config.sendMail({
                         from:'Leandro_Email <leandro.daniel.jr@gmail.com>',
-                        to:'leandro.daniel.jr@gmail.com',
-                        subject:'teste envio email (id: ' + bd_data[i].id + ' )',
-                        html: '<h1>Ola, teste</h1> id:  ' + bd_data[i].id  + ' teste email',
+                        to:'penkoretificame@gmail.com',
+                        subject:'*COBRANÇA* (O.S.: ' + bd_data[i].O_S+ ' )',
+                        html: '<h1>Cobrança para o dia: ' + bd_data[i].data_banco + '</h1> <h2>O.S.:  ' + bd_data[i].O_S  + ' Cliente: ' + bd_data[i].nome_cliente + '</h2>',
                         text: 'id: ' + bd_data[i].id + " teste email *esse;"
                     })
                     .then(async()=>{
@@ -64,11 +73,6 @@ async function busca_data(){
                                 .update({entrada_not_cob_email_enviado:1})
                     })
                     .catch((err)=> console.log(err))
-
-                    /*db('entrada_notificacao_cobranca')
-                    .where({entrada_not_cob_data_recebimento : data_teste})
-                    .where({entrada_not_cob_email_enviado:0})
-                    .update({entrada_not_cob_email_enviado:1})*/
         }
 
 }
