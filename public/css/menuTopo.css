@@ -29,7 +29,7 @@ a{
 .menuvisualizar{
     grid-template-columns: 4/6;
     grid-template-rows: 1/2;
-    background-color: rgb(83, 99, 187);
+    background-color: rgb(151, 149, 149);
     border-radius: 2px;
 }
 
@@ -42,7 +42,7 @@ a{
 .menueditar{
     grid-template-columns: 7/9;
     grid-template-rows: 1/2;
-    background-color: rgb(34, 192, 81);
+    background-color: rgb(151, 149, 149);
     border-radius: 2px;
 }
 
@@ -55,7 +55,7 @@ a{
 .menuapagar{
     grid-template-columns: 10/12;
     grid-template-rows: 1/2;
-    background-color: rgb(167, 52, 52);
+    background-color: rgb(151, 149, 149);
     border-radius: 2px;
 }
 
