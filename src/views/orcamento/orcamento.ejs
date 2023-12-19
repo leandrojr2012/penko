@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/fontawesome-free-6.4.0-web/css/all.min.css">
     <link rel="stylesheet" href="/css/orcamento.css">
     <title>ORCAMENTO</title>
 </head>
 <body>
     <%- include('../partials/menuTopo.ejs'); %>
-
     
     <form action="/orcamento_service" method="POST">    
 
         <div class="titulo">
             <label> 
-                <p class="titulo_escrita"><i class="fa-solid fa-address-card fa-xl"></i> Orçamento</p>
+                <p class="titulo_escrita"><i class="fa-solid fa-gavel  fa-xl"></i> Orçamento</p>
             </label>
         </div>
 
@@ -102,7 +102,7 @@
             </div>   
             <div class="conteiner_tres">
                 <div class="parte_cinco">
-                        <button type="button" class="botao_tela" onclick="calcular(document.getElementById('diametro').value, document.getElementById('comprimento').value, document.getElementById('fatorx').value)"><a href="#anchor">Calcular</a></button>
+                        <button type="button" class="botao_tela" onclick="calcular(document.getElementById('diametro').value, document.getElementById('comprimento').value, document.getElementById('fatorx').value)"><a href="#anchor">CALCULAR</a></button>
                 </div>
             </div>
             <div id="anchor"></div>
@@ -121,7 +121,7 @@
             
             <div class="conteiner_tres">
                 <div class="parte_cinco">
-                    <button type="button" class="btn btn-success" 
+                    <button type="button" class="botao_tela" 
                     onclick="adicionar(
                     document.getElementById('servico').value, 
                     document.getElementById('descricao').value, 
@@ -183,7 +183,7 @@
                         </label>
                     </div>
                     <div class="selecionadores">
-                        <label> .
+                        <label class="label_ponto"> .
                             <input type="text" name="fretevalor" placeholder="Ex: (Valor do FRETE) 250">
                         </label>
                     </div>
@@ -202,7 +202,7 @@
                          </label>
                     </div>
                     <div class="selecionadores">
-                        <label>.
+                        <label class="label_ponto">.
                             <input type="number" name="pagamento_forma_parcelado" placeholder="Ex: 7x">
                         </label>
                     </div>
@@ -210,7 +210,7 @@
 
                 <div class="parte_treze">
                     <div class="selecionadores">
-                        <label>Prazo de entrga:
+                        <label>Prazo de entrega:
                             <input type="number" name="prazo_entrega" placeholder="Ex: 4 dias">
                         </label>
                     </div>
@@ -226,21 +226,15 @@
 
             </div>
 
-
-                <div class="parte_tress">
-                   
-
-
-
-
-
-
-
-                    <button type="submit">OK</button>
+            <div class="conteiner_tres">
+                <div class="parte_cinco">
+                    <button type="submit" class="botao_tela"><i class="fa-regular fa-floppy-disk fa-xl"></i> SALVAR</button>
                 </div>
+            </div>
+
         </div>
+
     </form>
-</div>
 </body>
 
 <script>

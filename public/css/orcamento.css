@@ -11,6 +11,7 @@
 
     .geral{
         margin-left: 1%;
+        margin-bottom: 2%;
     }
 
     .conteiner{
@@ -27,19 +28,20 @@
 
     .conteiner_tres{
         padding-top: 1%;
+        padding-bottom: 1%;
         width: 99%;
         background-color: #f8f8f8;
     }
 
     .conteiner_quatro{
-        padding-top: 3%;
+        padding-top: 1%;
         width: 99%;
         background-color: #f8f8f8;
         display: inline-flex;
     }
 
     .conteiner_cinco{
-        padding-top: 5%;
+        padding-top: 1%;
         width: 99%;
         background-color: #f8f8f8;
     }
@@ -50,6 +52,7 @@
     }
 
     .conteiner_sete{
+        padding-top: 1%;
         width: 99%;
         display: inline-flex;
         justify-content: space-between;
@@ -202,6 +205,10 @@
 
     ::-webkit-input-placeholder{
         color: rgb(185, 185, 185);
+    }
+
+    .label_ponto{
+        color:#f8f8f8;
     }
 
     textarea{
