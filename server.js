@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 8080
+const port = 3003
 const path = require('path')
 const route = require('./routes')
 const session = require('express-session')
@@ -22,5 +22,5 @@ app.set('view engine', 'ejs')
 app.use(route)
 
 app.listen(port, ()=>{
-    console.log('Servidor Rodando na porta: ' + port + ' => http://localhost:8080')
+    console.log('Servidor Rodando na porta: ' + port + ' => http://localhost:3003')
 })

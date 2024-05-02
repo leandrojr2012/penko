@@ -19,8 +19,6 @@ exports.orcamento = async (req, res) =>{
     res.render('orcamento/orcamento.ejs', {rows_cliente, rows_descricao, rows_unidade, rows_servico, rows_numero_pedido})
 }
 
-
-
 exports.orcamento_service = (req, res) =>{
 
     const dados = req.body
